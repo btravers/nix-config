@@ -1,0 +1,62 @@
+{
+  description = "Nix-Darwin configuration";
+
+  inputs = {
+    nixpkgs.url = "https://flakehub.com/f/NixOS/nixpkgs/0";
+
+    nix-darwin = {
+      url = "https://flakehub.com/f/nix-darwin/nix-darwin/0";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    determinate = {
+      url = "https://flakehub.com/f/DeterminateSystems/determinate/3";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    home-manager = {
+      url = "https://flakehub.com/f/nix-community/home-manager/0";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+  };
+
+  outputs =
+    { self, ... }@inputs:
+    let
+      username = "btravers";
+      system = "aarch64-darwin";
+      helpers = import ./lib/helpers.nix { inherit inputs; };
+    in
+    {
+      darwinConfigurations.${username} = helpers.mkDarwin {
+        hostname = username;
+        inherit username;
+      };
+
+      devShells.${system}.default =
+        let
+          pkgs = import inputs.nixpkgs { inherit system; };
+        in
+        pkgs.mkShellNoCC {
+          packages = with pkgs; [
+            (writeShellApplication {
+              name = "apply-nix-darwin-configuration";
+              runtimeInputs = [
+                inputs.nix-darwin.packages.${system}.darwin-rebuild
+              ];
+              text = ''
+                echo "> Applying nix-darwin configuration..."
+                echo "> Running darwin-rebuild switch as root..."
+                sudo darwin-rebuild switch --flake .
+                echo "> darwin-rebuild switch was successful ✅"
+                echo "> macOS config was successfully applied 🚀"
+              '';
+            })
+
+            self.formatter.${system}
+          ];
+        };
+
+      formatter.${system} = inputs.nixpkgs.legacyPackages.${system}.nixfmt-rfc-style;
+    };
+}
