@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ lib, pkgs, ... }:
 {
   programs.zsh = {
     enable = true;
@@ -42,7 +42,7 @@
       }
     ];
 
-    initContent = ''
+    initContent = lib.mkBefore ''
       # ── Shell Options ──────────────────────────────────
       setopt NO_CLOBBER
       setopt NO_BEEP
@@ -112,8 +112,6 @@
       zstyle ':fzf-tab:complete:(cat|bat|less|head|tail|vim|nvim):*' fzf-preview 'bat --color=always --style=numbers --line-range=:500 $realpath 2>/dev/null || eza -1 --color=always $realpath'
       zstyle ':fzf-tab:*' switch-group '<' '>'
 
-      # ── Startup ────────────────────────────────────────
-      ${pkgs.fastfetch}/bin/fastfetch
     '';
   };
 }

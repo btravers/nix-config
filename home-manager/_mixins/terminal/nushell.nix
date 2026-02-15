@@ -1,4 +1,4 @@
-{ pkgs, username, ... }:
+{ username, ... }:
 {
   programs.nushell = {
     enable = true;
@@ -42,8 +42,6 @@
     '';
 
     extraConfig = ''
-      ${pkgs.fastfetch}/bin/fastfetch
-
       $env.config.hooks.display_output = {||
         if (term size).columns >= 100 { table -ed 1 } else { table }
       }

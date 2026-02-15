@@ -7,6 +7,11 @@
     NSNavPanelExpandedStateForSaveMode2 = true;
     PMPrintingExpandedStateForPrint = true;
     PMPrintingExpandedStateForPrint2 = true;
+    KeyRepeat = 2;
+    InitialKeyRepeat = 15;
+    NSAutomaticSpellingCorrectionEnabled = false;
+    NSAutomaticQuoteSubstitutionEnabled = false;
+    NSAutomaticDashSubstitutionEnabled = false;
   };
 
   system.defaults.SoftwareUpdate.AutomaticallyInstallMacOSUpdates = true;

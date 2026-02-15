@@ -1,16 +1,13 @@
-{ pkgs, ... }:
+{ ... }:
 {
   xdg.configFile."ghostty/config" = {
     text = ''
       theme = catppuccin-mocha
       font-family = JetBrainsMono Nerd Font
-      command = ${pkgs.writeShellScript "ghostty-shell" ''
-        for i in $(seq 1 10); do
-          [ -x /run/current-system/sw/bin/nu ] && exec /run/current-system/sw/bin/nu -l
-          sleep 1
-        done
-        exec /bin/zsh -l
-      ''}
+      command = /run/current-system/sw/bin/nu -l
+
+      # Remap cmd+t to open a new window instead of a tab (use tmux for tabs)
+      keybind = cmd+t=new_window
     '';
   };
 

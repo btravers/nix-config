@@ -1,7 +1,9 @@
-{ pkgs, username, ... }:
+{ pkgs, config, username, ... }:
 {
   imports = [
     ./_mixins/desktop
+    ./_mixins/features/nix-registry.nix
+    ./_mixins/features/nix-homebrew.nix
   ];
 
   system.stateVersion = 1;
@@ -12,21 +14,26 @@
     name = username;
     home = "/Users/${username}";
     uid = 501;
-    shell = pkgs.nushell;
+    shell = "/bin/zsh";
   };
 
   security.pam.services.sudo_local.touchIdAuth = true;
 
-  environment.shells = [ pkgs.nushell ];
+  system.startup.chime = false;
+
+  environment.shells = [
+    pkgs.zsh
+    pkgs.nushell
+  ];
 
   environment.systemPackages = with pkgs; [
     curl
-    fastfetch
     ffmpeg
     gh
     htop
     imagemagick
     jq
+    nixd
     nushell
     poppler
     resvg
@@ -53,19 +60,18 @@
   homebrew = {
     enable = true;
     onActivation.cleanup = "zap";
-    taps = [
-      "TheBoredTeam/boring-notch"
-    ];
+    taps = builtins.attrNames config.nix-homebrew.taps;
     casks = [
-      "font-jetbrains-mono-nerd-font"
       "TheBoredTeam/boring-notch/boring-notch"
       "claude"
       "claude-code"
       "docker-desktop"
       "firefox"
+      "font-jetbrains-mono-nerd-font"
       "ghostty"
       "google-chrome"
       "obsidian"
+      "nikitabobko/tap/aerospace"
       "raycast"
       "slack"
       "spotify"
