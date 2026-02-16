@@ -94,6 +94,28 @@
               '';
             })
 
+            (writeShellApplication {
+              name = "check-nix-darwin-configuration";
+              runtimeInputs = [ ];
+              text = ''
+                echo "> Checking nix-darwin configuration for errors..."
+                nix flake check
+                echo "> Configuration check passed ✅"
+              '';
+            })
+
+            (writeShellApplication {
+              name = "diff-nix-darwin-configuration";
+              runtimeInputs = [ nvd ];
+              text = ''
+                echo "> Building new configuration..."
+                nix build .#darwinConfigurations.${username}.system --out-link /tmp/nix-darwin-new
+                echo "> Comparing with current system..."
+                nvd diff /run/current-system /tmp/nix-darwin-new
+                rm /tmp/nix-darwin-new
+              '';
+            })
+
             self.formatter.${system}
           ];
         };

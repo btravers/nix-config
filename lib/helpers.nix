@@ -54,6 +54,10 @@ in
           };
         }
         ../darwin
-      ];
+      ]
+      ++ (
+        # Conditionally load per-host config if it exists
+        if builtins.pathExists (../darwin + "/${hostname}") then [ (../darwin + "/${hostname}") ] else [ ]
+      );
     };
 }

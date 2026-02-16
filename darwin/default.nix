@@ -1,4 +1,9 @@
-{ pkgs, config, username, ... }:
+{
+  pkgs,
+  config,
+  username,
+  ...
+}:
 {
   imports = [
     ./_mixins/desktop
@@ -53,6 +58,15 @@
         "build-time-fetch-tree"
       ];
     };
+  };
+
+  nix.settings = {
+    experimental-features = [
+      "nix-command"
+      "flakes"
+    ];
+    warn-dirty = false;
+    auto-optimise-store = true;
   };
 
   homebrew = {

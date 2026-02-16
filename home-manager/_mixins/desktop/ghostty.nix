@@ -11,6 +11,9 @@
     '';
   };
 
+  # Note: Ghostty doesn't yet have native Catppuccin support in the catppuccin/nix flake.
+  # This theme is manually defined from the official Catppuccin Mocha palette.
+  # Check https://github.com/catppuccin/nix for Ghostty support in future releases.
   xdg.configFile."ghostty/themes/catppuccin-mocha" = {
     text = ''
       palette = 0=#45475a
