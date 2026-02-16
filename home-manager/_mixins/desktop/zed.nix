@@ -4,7 +4,6 @@
 
   xdg.configFile."zed/settings.json" = {
     text = builtins.toJSON {
-      lsp.nil.binary.path = "${pkgs.nil}/bin/nil";
       icon_theme = "Catppuccin Macchiato";
       telemetry = {
         diagnostics = false;
@@ -30,6 +29,46 @@
         html = true;
         nix = true;
         oxc = true;
+        # New extensions for React + Rust stack
+        rust = true;
+        toml = true;
+        typescript = true;
+        tailwind = true;
+      };
+      lsp = {
+        # Nix LSP
+        nil.binary.path = "${pkgs.nil}/bin/nil";
+
+        # Rust analyzer configuration
+        rust-analyzer = {
+          initialization_options = {
+            check = {
+              command = "clippy"; # Use clippy instead of cargo check
+            };
+            cargo = {
+              features = "all"; # Enable all features
+            };
+          };
+        };
+
+        # TypeScript language server
+        typescript-language-server = {
+          initialization_options = {
+            preferences = {
+              includeInlayParameterNameHints = "all";
+              includeInlayFunctionParameterTypeHints = true;
+            };
+          };
+        };
+
+        # Tailwind CSS language server (with Rust support for Leptos)
+        tailwindcss-language-server = {
+          initialization_options = {
+            userLanguages = {
+              rust = "html"; # Enable Tailwind in Leptos view! macros
+            };
+          };
+        };
       };
     };
   };
