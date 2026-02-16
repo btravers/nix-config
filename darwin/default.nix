@@ -31,7 +31,6 @@
   ];
 
   environment.systemPackages = with pkgs; [
-    # Core utilities
     curl
     ffmpeg
     gh
@@ -47,13 +46,11 @@
     vim
     wget
     _7zz
-
-    # Workflow tools
-    just # Modern task runner (better than Make)
-    direnv # Auto-load environment per directory
-    watchexec # Run commands on file changes
-    httpie # Modern HTTP client
-    yq-go # YAML processor (like jq for YAML)
+    just
+    direnv
+    watchexec
+    httpie
+    yq-go
   ];
 
   programs.zsh.enable = true;

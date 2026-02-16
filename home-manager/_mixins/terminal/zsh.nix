@@ -115,10 +115,9 @@
     '';
   };
 
-  # direnv integration - auto-load .envrc files per directory
   programs.direnv = {
     enable = true;
     enableZshIntegration = true;
-    nix-direnv.enable = true; # Better Nix integration for direnv
+    nix-direnv.enable = true;
   };
 }
