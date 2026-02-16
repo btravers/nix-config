@@ -68,6 +68,10 @@
       alt-7 = 'workspace 7'
       alt-8 = 'workspace 8'
       alt-9 = 'workspace 9'
+      
+      # Cycle through workspaces
+      alt-tab = 'workspace next'
+      alt-shift-tab = 'workspace prev'
 
       # Move windows to workspaces
       alt-shift-1 = 'move-node-to-workspace 1'
