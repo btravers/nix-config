@@ -4,8 +4,7 @@
     ./_mixins/desktop/aerospace.nix
     ./_mixins/desktop/ghostty.nix
     ./_mixins/desktop/zed.nix
-    ./_mixins/development/git.nix
-    ./_mixins/development/rust.nix
+    ./_mixins/development # Auto-imports default.nix which imports all dev modules
     ./_mixins/terminal
     ./_mixins/users/${username}
   ];
