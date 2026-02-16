@@ -23,7 +23,6 @@
 
   environment.shells = [
     pkgs.zsh
-    pkgs.nushell
   ];
 
   environment.systemPackages = with pkgs; [
@@ -34,7 +33,6 @@
     imagemagick
     jq
     nixd
-    nushell
     poppler
     resvg
     ripgrep

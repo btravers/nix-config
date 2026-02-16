@@ -20,7 +20,7 @@
       };
       terminal = {
         shell = {
-          program = "/run/current-system/sw/bin/nu";
+          program = "/bin/zsh";
         };
       };
       auto_install_extensions = {

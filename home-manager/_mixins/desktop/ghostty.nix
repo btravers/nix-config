@@ -4,7 +4,7 @@
     text = ''
       theme = catppuccin-mocha
       font-family = JetBrainsMono Nerd Font
-      command = /run/current-system/sw/bin/nu -l
+      command = /bin/zsh -l
 
       # Remap cmd+t to open a new window instead of a tab (use tmux for tabs)
       keybind = cmd+t=new_window

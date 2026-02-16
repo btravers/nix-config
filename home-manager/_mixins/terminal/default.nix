@@ -8,7 +8,6 @@
     ./fd.nix
     ./fnm.nix
     ./fzf.nix
-    ./nushell.nix
     ./starship.nix
     ./tmux.nix
     ./yazi.nix
