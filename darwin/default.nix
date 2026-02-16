@@ -68,6 +68,7 @@
       "font-jetbrains-mono-nerd-font"
       "ghostty"
       "google-chrome"
+      "intellij-idea"
       "obsidian"
       "nikitabobko/tap/aerospace"
       "raycast"

@@ -15,7 +15,7 @@
     homeDirectory = "/Users/${username}";
     stateVersion = "25.11";
     shellAliases = {
-      # ls = "eza";
+      ls = "eza";
       ll = "eza -la";
       cat = "bat";
       lg = "lazygit";
