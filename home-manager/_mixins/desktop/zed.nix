@@ -27,6 +27,7 @@
         catppuccin = true;
         catppuccin-icons = true;
         html = true;
+        just = true;
         nix = true;
         oxc = true;
         # New extensions for React + Rust stack
