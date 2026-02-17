@@ -48,6 +48,7 @@
     _7zz
     just
     direnv
+    tilt
     watchexec
     httpie
     yq-go
