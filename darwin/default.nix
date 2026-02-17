@@ -76,7 +76,9 @@
 
   homebrew = {
     enable = true;
+    onActivation.autoUpdate = true;
     onActivation.cleanup = "zap";
+    onActivation.upgrade = true;
     taps = builtins.attrNames config.nix-homebrew.taps;
     casks = [
       "TheBoredTeam/boring-notch/boring-notch"
