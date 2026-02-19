@@ -31,6 +31,7 @@
   ];
 
   environment.systemPackages = with pkgs; [
+    bun
     curl
     ffmpeg
     gh
@@ -39,6 +40,7 @@
     jq
     nixd
     poppler
+    protobuf
     resvg
     ripgrep
     tldr
