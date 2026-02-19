@@ -87,6 +87,7 @@
       "claude-code"
       "docker-desktop"
       "firefox"
+      "firefox@developer-edition"
       "font-jetbrains-mono-nerd-font"
       "ghostty"
       "google-chrome"

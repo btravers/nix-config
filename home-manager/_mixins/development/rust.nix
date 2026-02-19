@@ -5,6 +5,7 @@
     trunk
     wasm-bindgen-cli
     cargo-edit
+    cargo-leptos
   ];
 
   home.sessionVariables = {
