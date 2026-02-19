@@ -4,6 +4,10 @@
     rustup
   ];
 
+  home.sessionPath = [
+    "$HOME/.cargo/bin"
+  ];
+
   home.sessionVariables = {
     RUST_BACKTRACE = "1";
   };

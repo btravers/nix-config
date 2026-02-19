@@ -30,10 +30,6 @@
     pkgs.zsh
   ];
 
-  environment.systemPath = [
-    "/Users/${username}/.cargo/bin"
-  ];
-
   environment.systemPackages = with pkgs; [
     curl
     ffmpeg
