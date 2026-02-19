@@ -97,6 +97,7 @@
       "raycast"
       "slack"
       "spotify"
+      "whatsapp"
       "zed"
     ];
   };
