@@ -9,17 +9,11 @@
     };
   })
 
-  # Patch or override upstream packages
-  # Fix direnv build: remove -linkmode=external incompatible with CGO_ENABLED=0
-  # (upstream fix: https://github.com/NixOS/nixpkgs/pull/486452)
+  # Disable direnv tests: fish test gets SIGKILL in macOS sandbox
   (_final: prev: {
-    direnv = prev.direnv.overrideAttrs (old: {
-      postPatch =
-        (old.postPatch or "")
-        + ''
-          substituteInPlace GNUmakefile --replace-fail " -linkmode=external" ""
-        '';
-    });
+    direnv = prev.direnv.overrideAttrs {
+      doCheck = false;
+    };
   })
 
   # Custom local packages from ../pkgs
