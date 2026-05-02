@@ -49,7 +49,6 @@
     wget
     _7zz
     just
-    direnv
     tilt
     watchexec
     httpie
@@ -57,6 +56,8 @@
   ];
 
   programs.zsh.enable = true;
+
+  nixpkgs.config.allowUnfree = true;
 
   determinateNix = {
     enable = true;

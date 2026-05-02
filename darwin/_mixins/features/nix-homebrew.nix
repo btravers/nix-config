@@ -8,7 +8,6 @@
   nix-homebrew = {
     enable = true;
     user = username;
-    autoMigrate = true;
     enableRosetta = pkgs.stdenv.hostPlatform.isAarch64;
     taps = {
       "homebrew/homebrew-core" = inputs.homebrew-core;

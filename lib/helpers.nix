@@ -9,8 +9,6 @@ in
       hostname,
       username ? "btravers",
       system ? "aarch64-darwin",
-      isWorkstation ? true,
-      isLaptop ? true,
     }:
     inputs.nix-darwin.lib.darwinSystem {
       inherit system;
@@ -19,8 +17,6 @@ in
           inputs
           username
           hostname
-          isWorkstation
-          isLaptop
           ;
       };
       modules = [
@@ -40,8 +36,6 @@ in
                 inputs
                 username
                 hostname
-                isWorkstation
-                isLaptop
                 ;
             };
             sharedModules = [
