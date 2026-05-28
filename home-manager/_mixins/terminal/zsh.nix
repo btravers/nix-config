@@ -43,6 +43,9 @@
     ];
 
     initContent = lib.mkBefore ''
+      # Raise open file limit; `nix flake update` exhausts the macOS default.
+      ulimit -n 65536
+
       # ── Shell Options ──────────────────────────────────
       setopt NO_CLOBBER
       setopt NO_BEEP

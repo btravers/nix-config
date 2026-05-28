@@ -50,13 +50,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    sops-nix = {
-      url = "github:Mic92/sops-nix";
+    # TODO: unpin once catppuccin/nix fixes opencode module (references non-existent programs.opencode.tui option)
+    catppuccin = {
+      url = "github:catppuccin/nix/ba73719";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    # TODO: unpin once catppuccin/nix fixes opencode module (references non-existent programs.opencode.tui option)
-    catppuccin.url = "github:catppuccin/nix/ba73719";
   };
 
   outputs =

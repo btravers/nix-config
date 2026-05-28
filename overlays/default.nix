@@ -15,7 +15,4 @@
       doCheck = false;
     };
   })
-
-  # Custom local packages from ../pkgs
-  (_final: _prev: { })
 ]

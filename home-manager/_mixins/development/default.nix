@@ -2,9 +2,11 @@
 {
   imports = [
     ./cloud.nix
-    ./git.nix
-    ./rust.nix
-    ./web.nix
     ./database.nix
+    ./git.nix
+    ./multimedia.nix
+    ./rust.nix
+    ./tools.nix
+    ./web.nix
   ];
 }

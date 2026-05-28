@@ -4,11 +4,16 @@
     ./bat.nix
     ./btop.nix
     ./carapace.nix
+    ./cli.nix
     ./eza.nix
     ./fd.nix
     ./fnm.nix
     ./fzf.nix
+    ./gh.nix
+    ./htop.nix
+    ./jq.nix
     ./opencode.nix
+    ./ripgrep.nix
     ./starship.nix
     ./tmux.nix
     ./yazi.nix

@@ -52,7 +52,7 @@ This configuration follows a modular, composable architecture designed for maint
    - Provide sensible defaults, allow targeted overrides
 
 4. **Context Propagation**
-   - Pass metadata via `specialArgs`: `username`, `hostname`, `isWorkstation`, `isLaptop`
+   - Pass metadata via `specialArgs`: `username`, `hostname`, `inputs`
    - Never hardcode usernames, hostnames, or platform-specific values
    - Make all modules context-aware
 
@@ -111,18 +111,10 @@ This configuration follows a modular, composable architecture designed for maint
 │       └── users/<username>/        # Per-user overrides
 │           └── default.nix          # User-specific config
 │
-├── overlays/
-│   └── default.nix                  # Package overlays
-│                                    # - unstable packages
-│                                    # - modified packages
-│                                    # - local packages
-│
-├── pkgs/                            # Custom package derivations (optional)
-│   └── <package-name>/
-│       └── default.nix
-│
-└── secrets/                         # SOPS-encrypted secrets (optional)
-    └── secrets.yaml
+└── overlays/
+    └── default.nix                  # Package overlays
+                                     # - unstable packages
+                                     # - modified packages
 ```
 
 ## Home-Manager Integration
@@ -247,7 +239,6 @@ homebrew = {
 - **`mac-app-util`**: Makes Nix-installed .app bundles visible in Spotlight/Launchpad
 - **`nix-homebrew`**: Declarative Homebrew tap management
 - **`nix-index-database`**: Pre-built database for `command-not-found` functionality
-- **`sops-nix`**: Encrypted secrets management (age-based)
 - **`catppuccin`**: Unified theming across applications
 - **`determinate`**: Determinate Systems Nix installer enhancements
 
@@ -320,7 +311,7 @@ nix.settings = {
 - **Context-aware modules**: Use `specialArgs` for dynamic behavior
 
   ```nix
-  { username, hostname, isLaptop, ... }:
+  { username, hostname, ... }:
   {
     # Configuration that adapts to context
   }
@@ -376,7 +367,6 @@ To add a new machine to this configuration:
    darwinConfigurations.new-hostname = helpers.mkDarwin {
      hostname = "new-hostname";
      username = "your-username";
-     isLaptop = true;  # or false
    };
    ```
 

@@ -31,28 +31,10 @@
   ];
 
   environment.systemPackages = with pkgs; [
-    bun
+    _7zz
     curl
-    ffmpeg
-    gh
-    htop
-    imagemagick
-    jq
-    nixd
-    poppler
-    protobuf
-    resvg
-    ripgrep
-    tldr
-    tree
     vim
     wget
-    _7zz
-    just
-    tilt
-    watchexec
-    httpie
-    yq-go
   ];
 
   programs.zsh.enable = true;
@@ -62,7 +44,6 @@
   determinateNix = {
     enable = true;
     customSettings = {
-      eval-cores = 0;
       extra-experimental-features = [
         "build-time-fetch-tree"
       ];
