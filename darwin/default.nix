@@ -65,6 +65,12 @@
     onActivation.cleanup = "zap";
     onActivation.upgrade = true;
     taps = builtins.attrNames config.nix-homebrew.taps;
+    brews = [
+      "gdb"
+      "lsusb"
+      "minicom"
+      "sdl2"
+    ];
     casks = [
       "TheBoredTeam/boring-notch/boring-notch"
       "claude"
