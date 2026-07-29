@@ -21,7 +21,16 @@
 
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
 
-    nix-homebrew.url = "github:zhaofengli/nix-homebrew";
+    nix-homebrew = {
+      url = "github:zhaofengli/nix-homebrew";
+      # nix-homebrew pins an older brew than the homebrew-core/cask taps
+      # require; keep brew-src at least as new as the taps' DSL.
+      inputs.brew-src.follows = "brew-src";
+    };
+    brew-src = {
+      url = "github:Homebrew/brew/6.0.13";
+      flake = false;
+    };
     homebrew-core = {
       url = "github:homebrew/homebrew-core";
       flake = false;
