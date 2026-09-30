@@ -46,6 +46,11 @@
       # Raise open file limit; `nix flake update` exhausts the macOS default.
       ulimit -n 65536
 
+      # Appended, not prepended: curl/pipx/uv installers write here and must
+      # not shadow nix-managed tools. Holds the native Claude Code install.
+      typeset -U path
+      path+=("$HOME/.local/bin")
+
       # ── Shell Options ──────────────────────────────────
       setopt NO_CLOBBER
       setopt NO_BEEP

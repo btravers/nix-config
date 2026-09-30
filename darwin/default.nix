@@ -74,7 +74,6 @@
     casks = [
       "TheBoredTeam/boring-notch/boring-notch"
       "claude"
-      "claude-code"
       "docker-desktop"
       "firefox"
       "firefox@developer-edition"
