@@ -19,16 +19,9 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nix-homebrew = {
-      url = "github:zhaofengli/nix-homebrew";
-      # nix-homebrew pins an older brew than the homebrew-core/cask taps
-      # require; keep brew-src at least as new as the taps' DSL.
-      inputs.brew-src.follows = "brew-src";
-    };
-    brew-src = {
-      url = "github:Homebrew/brew/6.0.13";
-      flake = false;
-    };
+    # Brew version comes from nix-homebrew's own lock; update nix-homebrew
+    # together with the taps (`nix flake update`) so brew understands their DSL.
+    nix-homebrew.url = "github:zhaofengli/nix-homebrew";
     homebrew-core = {
       url = "github:homebrew/homebrew-core";
       flake = false;
