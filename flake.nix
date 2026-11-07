@@ -51,9 +51,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # TODO: unpin once catppuccin/nix fixes opencode module (references non-existent programs.opencode.tui option)
     catppuccin = {
-      url = "github:catppuccin/nix/ba73719";
+      url = "github:catppuccin/nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
