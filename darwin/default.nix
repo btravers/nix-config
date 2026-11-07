@@ -62,7 +62,6 @@
     ];
     casks = [
       "TheBoredTeam/boring-notch/boring-notch"
-      "ankama"
       "autodesk-fusion"
       "bambu-connect"
       "bambu-studio"
@@ -77,6 +76,7 @@
       "google-chrome"
       "intellij-idea"
       "obsidian"
+      "ollama-app"
       "nikitabobko/tap/aerospace"
       "raycast"
       "slack"
