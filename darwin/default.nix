@@ -62,7 +62,13 @@
     ];
     casks = [
       "TheBoredTeam/boring-notch/boring-notch"
+      "ankama"
+      "autodesk-fusion"
+      "bambu-connect"
+      "bambu-studio"
+      "chatgpt"
       "claude"
+      "cyberghost-vpn"
       "docker-desktop"
       "firefox"
       "firefox@developer-edition"

@@ -75,6 +75,26 @@ This configuration is organized into modular components:
 - 🎨 **Unified Theming** - Catppuccin theme across applications
 - 🛠️ **Development Shell** - Built-in tools for config management
 
+## 🤖 AI Coding CLIs (outside Nix)
+
+`claude` (Claude Code) and `codex` are installed with their vendors' native
+installers into `~/.local/bin` and update themselves. They are deliberately
+not managed here, because nixpkgs and the pinned Homebrew taps lag behind
+their release cadence.
+
+**Option if this changes:** [`numtide/llm-agents.nix`](https://github.com/numtide/llm-agents.nix)
+packages `claude-code`, `codex`, `opencode` and others, is updated daily, and
+ships a binary cache. To switch:
+
+1. Add the flake input `llm-agents.url = "github:numtide/llm-agents.nix";`
+   and its binary cache (see its README) to `determinateNix.customSettings`.
+2. Add `inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.claude-code`
+   (and `codex`) to `home.packages`.
+3. Set `DISABLE_AUTOUPDATER=1` so Claude Code doesn't try to update itself.
+4. Remove the native installs: `~/.local/bin/{claude,codex}`,
+   `~/.local/share/claude`, `~/.codex/packages`.
+5. Update with `nix flake update llm-agents`.
+
 ## 🎯 Philosophy
 
 This configuration follows these principles:
