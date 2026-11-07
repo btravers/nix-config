@@ -10,12 +10,8 @@
     FocusModes = false;
   };
 
+  # Hide Spotlight from the menu bar. -currentHost targets ByHost/com.apple.Spotlight.<UUID>.plist.
   system.activationScripts.postActivation.text = ''
-    SPOTLIGHT_PLIST=$(ls /Users/${username}/Library/Preferences/ByHost/com.apple.Spotlight.*.plist 2>/dev/null | head -1)
-    if [ -n "$SPOTLIGHT_PLIST" ]; then
-      sudo -u ${username} defaults write "$SPOTLIGHT_PLIST" MenuItemHidden -int 1
-    else
-      sudo -u ${username} defaults -currentHost write com.apple.Spotlight MenuItemHidden -int 1
-    fi
+    sudo -u ${username} defaults -currentHost write com.apple.Spotlight MenuItemHidden -int 1
   '';
 }

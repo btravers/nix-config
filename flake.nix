@@ -116,6 +116,6 @@
           ];
         };
 
-      formatter.${system} = inputs.nixpkgs.legacyPackages.${system}.nixfmt-rfc-style;
+      formatter.${system} = inputs.nixpkgs.legacyPackages.${system}.nixfmt;
     };
 }

@@ -16,5 +16,8 @@
       "nikitabobko/homebrew-tap" = inputs.homebrew-aerospace;
     };
     mutableTaps = false;
+    # ponytail: workaround for zhaofengli/nix-homebrew#187 (generated bin/brew
+    # shim lacks this export, every brew command crashes); drop once fixed upstream.
+    extraEnv.HOMEBREW_ORIGINAL_BREW_FILE = "/opt/homebrew/bin/brew";
   };
 }
