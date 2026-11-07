@@ -26,10 +26,6 @@
 
   system.startup.chime = false;
 
-  environment.shells = [
-    pkgs.zsh
-  ];
-
   environment.systemPackages = with pkgs; [
     _7zz
     curl
@@ -41,22 +37,15 @@
 
   nixpkgs.config.allowUnfree = true;
 
+  # Determinate owns nix.conf; nix.settings is ignored. Flakes are on by default.
   determinateNix = {
     enable = true;
     customSettings = {
       extra-experimental-features = [
         "build-time-fetch-tree"
       ];
+      warn-dirty = false;
     };
-  };
-
-  nix.settings = {
-    experimental-features = [
-      "nix-command"
-      "flakes"
-    ];
-    warn-dirty = false;
-    auto-optimise-store = true;
   };
 
   homebrew = {

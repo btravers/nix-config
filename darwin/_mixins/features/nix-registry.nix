@@ -5,9 +5,7 @@ let
   flakeInputs = lib.filterAttrs (_: v: v ? outputs) inputs;
 in
 {
-  # Pin the flake registry so `nix shell nixpkgs#foo` uses locked versions
-  nix.registry = lib.mapAttrs (_: flake: { inherit flake; }) flakeInputs;
-
-  # Legacy <nixpkgs> channel compatibility
-  nix.nixPath = lib.mapAttrsToList (n: _: "${n}=flake:${n}") flakeInputs;
+  # Pin the flake registry so `nix shell nixpkgs#foo` uses locked versions.
+  # determinateNix.*, not nix.*: Determinate disables nix-darwin's nix module.
+  determinateNix.registry = lib.mapAttrs (_: flake: { inherit flake; }) flakeInputs;
 }

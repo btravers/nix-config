@@ -10,7 +10,7 @@
     FocusModes = false;
   };
 
-  system.activationScripts.hideSpotlight.text = ''
+  system.activationScripts.postActivation.text = ''
     SPOTLIGHT_PLIST=$(ls /Users/${username}/Library/Preferences/ByHost/com.apple.Spotlight.*.plist 2>/dev/null | head -1)
     if [ -n "$SPOTLIGHT_PLIST" ]; then
       sudo -u ${username} defaults write "$SPOTLIGHT_PLIST" MenuItemHidden -int 1

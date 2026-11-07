@@ -4,7 +4,7 @@
 
   xdg.configFile."zed/settings.json" = {
     text = builtins.toJSON {
-      icon_theme = "Catppuccin Macchiato";
+      icon_theme = "Catppuccin Mocha";
       telemetry = {
         diagnostics = false;
         metrics = false;
@@ -15,7 +15,7 @@
       theme = {
         mode = "system";
         light = "One Light";
-        dark = "Catppuccin Macchiato";
+        dark = "Catppuccin Mocha";
       };
       terminal = {
         shell = {

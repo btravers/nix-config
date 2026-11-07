@@ -19,8 +19,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-
     nix-homebrew = {
       url = "github:zhaofengli/nix-homebrew";
       # nix-homebrew pins an older brew than the homebrew-core/cask taps
@@ -39,10 +37,6 @@
       url = "github:homebrew/homebrew-cask";
       flake = false;
     };
-    homebrew-bundle = {
-      url = "github:homebrew/homebrew-bundle";
-      flake = false;
-    };
     homebrew-boring-notch = {
       url = "github:TheBoredTeam/homebrew-boring-notch";
       flake = false;
@@ -51,8 +45,6 @@
       url = "github:nikitabobko/homebrew-tap";
       flake = false;
     };
-
-    mac-app-util.url = "github:hraban/mac-app-util";
 
     nix-index-database = {
       url = "github:nix-community/nix-index-database";

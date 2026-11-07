@@ -24,7 +24,6 @@ in
         inputs.determinate.darwinModules.default
         inputs.home-manager.darwinModules.home-manager
         inputs.nix-homebrew.darwinModules.nix-homebrew
-        inputs.mac-app-util.darwinModules.default
         {
           home-manager = {
             useGlobalPkgs = true;
@@ -38,7 +37,6 @@ in
                 ;
             };
             sharedModules = [
-              inputs.mac-app-util.homeManagerModules.default
               inputs.nix-index-database.homeModules.nix-index
               inputs.catppuccin.homeModules.catppuccin
             ];

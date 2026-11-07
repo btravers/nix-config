@@ -113,7 +113,6 @@ This configuration follows a modular, composable architecture designed for maint
 │
 └── overlays/
     └── default.nix                  # Package overlays
-                                     # - unstable packages
                                      # - modified packages
 ```
 
@@ -156,51 +155,20 @@ Replace imperative activation scripts with declarative home-manager modules:
 
 ### Channel Strategy
 
-- **Primary channel**: `nixpkgs` (latest stable or unstable)
-  - Use nixpkgs-unstable for better darwin support
-  - Set via `inputs.nixpkgs.url`
-
-- **Unstable channel**: `nixpkgs-unstable` (separate input)
-  - For cherry-picking bleeding-edge packages
-  - Available as `pkgs.unstable.<package>` via overlay
+- **Single channel**: `nixpkgs` from FlakeHub `NixOS/nixpkgs/0` (rolling unstable)
+  - Don't add a second nixpkgs input unless a package is actually pinned to it
 
 ### Overlay Pattern
 
-Expose unstable packages via overlay (in `overlays/default.nix`):
-
-```nix
-[
-  # Unstable packages overlay
-  (final: _prev: {
-    unstable = import inputs.nixpkgs-unstable {
-      inherit (final) system;
-      config.allowUnfree = true;
-    };
-  })
-
-  # Modified packages overlay
-  (final: prev: {
-    # Patch or override upstream packages
-  })
-
-  # Local packages overlay
-  (final: prev: {
-    # Custom packages from pkgs/
-  })
-]
-```
-
-**Benefits**:
-- No need to pass `unstablePkgs` via `specialArgs`
-- Unstable packages available everywhere as `pkgs.unstable.*`
-- Clean separation of package sources
+`overlays/default.nix` holds package overrides only (e.g. disabling a flaky
+test suite). Add an overlay entry when an upstream package needs patching.
 
 ## Homebrew Management
 
 ### Configuration Strategy
 
 - **Pin taps as flake inputs** with `flake = false`
-  - `homebrew-core`, `homebrew-cask`, `homebrew-bundle`
+  - `homebrew-core`, `homebrew-cask` (`brew bundle` is built into brew; no tap needed)
   - Custom taps for specific applications
   - Ensures reproducible cask versions
 
@@ -236,7 +204,6 @@ homebrew = {
 
 ### Recommended Additions
 
-- **`mac-app-util`**: Makes Nix-installed .app bundles visible in Spotlight/Launchpad
 - **`nix-homebrew`**: Declarative Homebrew tap management
 - **`nix-index-database`**: Pre-built database for `command-not-found` functionality
 - **`catppuccin`**: Unified theming across applications
@@ -265,20 +232,25 @@ let
   flakeInputs = lib.filterAttrs (_: v: v ? outputs) inputs;
 in
 {
-  nix.registry = lib.mapAttrs (_: flake: { inherit flake; }) flakeInputs;
-  nix.nixPath = lib.mapAttrsToList (n: _: "${n}=flake:${n}") flakeInputs;
+  determinateNix.registry = lib.mapAttrs (_: flake: { inherit flake; }) flakeInputs;
 }
 ```
 
-### Recommended Settings
+### Settings (Determinate Nix)
+
+Determinate Nix disables nix-darwin's Nix module, so `nix.settings`,
+`nix.registry` and `nix.nixPath` are silently ignored. Use the
+`determinateNix.*` options instead:
 
 ```nix
-nix.settings = {
-  experimental-features = [ "nix-command" "flakes" ];
+determinateNix.customSettings = {
   warn-dirty = false;              # Don't warn on dirty git trees
-  auto-optimise-store = true;      # Automatic store optimization
 };
 ```
+
+Flakes and `nix-command` are enabled by default. Leave
+`auto-optimise-store` off on macOS (known store corruption issues);
+run `nix store optimise` manually if needed.
 
 ## Coding Conventions
 
@@ -465,12 +437,8 @@ Set `nix.settings.warn-dirty = false` in `darwin/default.nix`.
 ### Store Optimization
 
 ```sh
-# Manual optimization
-nix-store --optimise
-
-# Enable automatic optimization
-# Add to darwin/default.nix:
-# nix.settings.auto-optimise-store = true;
+# Manual optimization (auto-optimise-store is unsafe on macOS)
+nix store optimise
 ```
 
 ## Best Practices Summary
