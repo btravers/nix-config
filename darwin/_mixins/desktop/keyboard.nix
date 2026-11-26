@@ -1,29 +1,5 @@
-{ username, hostname, ... }:
-let
-  # Physical keyboards: Air is French AZERTY, Pro is US ANSI.
-  layout =
-    if hostname == "macbook-air" then
-      {
-        id = 1;
-        name = "French";
-      }
-    else
-      {
-        id = 0;
-        name = "U.S.";
-      };
-  source = {
-    InputSourceKind = "Keyboard Layout";
-    "KeyboardLayout ID" = layout.id;
-    "KeyboardLayout Name" = layout.name;
-  };
-in
+{ username, ... }:
 {
-  system.defaults.CustomUserPreferences."com.apple.HIToolbox" = {
-    AppleEnabledInputSources = [ source ];
-    AppleSelectedInputSources = [ source ];
-  };
-
   # Disable Spotlight shortcut (Cmd+Space) so Raycast can use it.
   # Must be postActivation: nix-darwin silently skips custom activationScripts names.
   system.activationScripts.postActivation.text = ''

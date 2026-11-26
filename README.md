@@ -81,9 +81,8 @@ keyboard). Replace `macbook-pro` below with the machine you are setting up.
    Restart the agents to pick the server up.
 
 To add a machine with a new hostname, see
-[Adding a New Machine](./DEVELOPMENT.md#adding-a-new-machine). Machines other
-than `macbook-air` get the US keyboard layout; change that in
-`darwin/_mixins/desktop/keyboard.nix`.
+[Adding a New Machine](./DEVELOPMENT.md#adding-a-new-machine). Each host sets
+its keyboard layout in `darwin/<hostname>/default.nix`.
 
 ### MCP Servers
 

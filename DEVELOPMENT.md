@@ -348,7 +348,8 @@ To add a new machine to this configuration:
 
 2. **(Optional) Add host-specific config**:
    - Create `darwin/new-hostname/default.nix`
-   - Add any machine-specific overrides
+   - Add any machine-specific overrides, including the keyboard layout
+     (`com.apple.HIToolbox`; see `darwin/macbook-air/default.nix`)
 
 3. **Deploy**:
    ```sh
