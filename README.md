@@ -27,44 +27,51 @@ A modular, maintainable nix-darwin configuration for macOS following best practi
 | `runner` | Old MacBook Pro, GitHub Actions runner | minimal: tart, gh, python, never sleeps (even with the lid closed) |
 
 Replace `pro` below with the machine you are setting up. On `runner`, skip
-step 8 (no vault or AI agents there) and the app steps in step 7.
+step 5 (no vault or AI agents there) and the app steps in step 4.
 
 1. **Finish the macOS setup assistant.** Create the account `btravers` as the
    first user on the machine (the config expects uid 501), sign in with your
    Apple ID, and install pending macOS updates.
 
-2. **Install the command line tools and Rosetta:**
+2. **Run the bootstrap script** in Terminal:
+   ```sh
+   curl -fsSL https://raw.githubusercontent.com/btravers/nix-config/main/bootstrap.sh | sh -s -- pro
+   ```
+   It asks for your password and shows one dialog (the command line tools).
+   Click Install there and the script carries on by itself:
+   1. installs the command line tools and Rosetta;
+   2. installs Determinate Nix;
+   3. clones this repository into `~/.config/nix-darwin` over HTTPS (there is
+      no SSH key yet);
+   4. applies the configuration for the host you named. It first sets aside the
+      `/etc` shell files nix-darwin won't overwrite, as `*.before-nix-darwin`,
+      and puts them back if the switch fails.
+
+   Each step is skipped when it's already done, so you can re-run the script
+   after fixing an error. Read [bootstrap.sh](./bootstrap.sh) first if you
+   like; it's about 70 lines.
+
+   <details>
+   <summary>The same steps by hand</summary>
+
    ```sh
    xcode-select --install
-   softwareupdate --install-rosetta --agree-to-license
-   ```
-
-3. **Install Determinate Nix**, then open a new terminal:
-   ```sh
+   sudo softwareupdate --install-rosetta --agree-to-license
    curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install
-   ```
-
-4. **Clone this repository** (HTTPS, since there is no SSH key yet):
-   ```sh
+   # open a new terminal
    git clone https://github.com/btravers/nix-config.git ~/.config/nix-darwin
-   ```
-   If the repository is private, authenticate first with
-   `nix run nixpkgs#gh -- auth login`, then clone with
-   `nix run nixpkgs#gh -- repo clone btravers/nix-config ~/.config/nix-darwin`.
-
-5. **Apply the configuration.** Name the host explicitly on the first run.
-   Activation sets the hostname, so later runs find it on their own:
-   ```sh
    cd ~/.config/nix-darwin
    nix develop --command sudo darwin-rebuild switch --flake .#pro
    ```
    If activation stops on *unexpected files in /etc*, rename each file it
-   lists (e.g. `sudo mv /etc/zshrc /etc/zshrc.before-nix-darwin`) and run it again.
+   lists (e.g. `sudo mv /etc/zshrc /etc/zshrc.before-nix-darwin`) and run it
+   again.
+   </details>
 
-6. **Log out and back in.** The language, keyboard layout and menu bar clock
+3. **Log out and back in.** The language, keyboard layout and menu bar clock
    only change at login.
 
-7. **Finish by hand** (things Nix can't do):
+4. **Finish by hand** (things Nix can't do):
    - Allow **AeroSpace** and **Raycast** in System Settings → Privacy &
      Security → Accessibility when they ask.
    - In Raycast, set the hotkey to `Cmd+Space` (Spotlight's shortcut is
@@ -77,7 +84,7 @@ step 8 (no vault or AI agents there) and the app steps in step 7.
      ```
    - Sign in to your apps (Slack, Obsidian, Spotify, …).
 
-8. **Apply the configuration again** now that GitHub SSH works:
+5. **Apply the configuration again** now that GitHub SSH works:
    ```sh
    nh darwin switch
    ```
