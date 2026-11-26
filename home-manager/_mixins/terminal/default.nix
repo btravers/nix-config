@@ -15,7 +15,8 @@
     ./jq.nix
     ./opencode.nix
     ./ripgrep.nix
-    ./tmux.nix
+    ./starship.nix
+    ./zellij.nix
     ./yazi.nix
     ./zoxide.nix
     ./zsh.nix
