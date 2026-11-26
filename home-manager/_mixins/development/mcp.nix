@@ -52,10 +52,16 @@ in
 {
   programs.mcp.enable = true;
 
-  home.activation.registerMcpServers = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-    claude="$HOME/.local/bin/claude"
-    codex="$HOME/.local/bin/codex"
-    desktop="$HOME/Library/Application Support/Claude/claude_desktop_config.json"
-    ${lib.concatStrings (lib.mapAttrsToList register config.programs.mcp.servers)}
-  '';
+  home.activation.registerMcpServers =
+    lib.hm.dag.entryAfter
+      [
+        "writeBoundary"
+        "installAgentCLIs"
+      ]
+      ''
+        claude="$HOME/.local/bin/claude"
+        codex="$HOME/.local/bin/codex"
+        desktop="$HOME/Library/Application Support/Claude/claude_desktop_config.json"
+        ${lib.concatStrings (lib.mapAttrsToList register config.programs.mcp.servers)}
+      '';
 }

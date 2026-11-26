@@ -365,13 +365,9 @@ To add a new machine to this configuration:
    sudo darwin-rebuild switch --flake "$HOME/.config/nix-darwin#new-hostname"
    ```
 
-4. **Install Claude Code** (native, self-updating; the cask lags behind the
-   pinned homebrew-cask input). It lands in `~/.local/bin`, which `zsh.nix`
-   adds to PATH:
-   ```sh
-   curl -fsSL https://claude.ai/install.sh | bash
-   ```
-   On a machine that still has the old `claude-code` cask, run
+4. **Claude Code and Codex** install themselves on the first workstation
+   rebuild (native, self-updating installers into `~/.local/bin`; see
+   `agents.nix`). On a machine that still has the old `claude-code` cask, run
    `brew uninstall --cask claude-code` **before** switching. Otherwise
    `cleanup = "zap"` trashes `~/.local/share/claude` and `~/.claude.json`.
 

@@ -28,9 +28,27 @@ in
     pkgs.typescript-language-server
   ];
 
+  # Claude Code and Codex come from their vendors' installers, not Nix: both
+  # ship several times a week and update themselves. Install them once if
+  # missing. ~/.local/bin on PATH keeps the installers from editing shell
+  # profiles (zsh.nix already adds it); /usr/bin provides their curl and tar.
+  home.activation.installAgentCLIs = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+    installer_path="$HOME/.local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+    if [ ! -x "$HOME/.local/bin/claude" ]; then
+      run env PATH="$installer_path" /bin/bash -c \
+        'set -o pipefail; curl -fsSL https://claude.ai/install.sh | bash' \
+        || warnEcho "agents: could not install Claude Code"
+    fi
+    if [ ! -x "$HOME/.local/bin/codex" ]; then
+      run env PATH="$installer_path" CODEX_NON_INTERACTIVE=1 /bin/bash -c \
+        'set -o pipefail; curl -fsSL https://chatgpt.com/codex/install.sh | sh' \
+        || warnEcho "agents: could not install Codex"
+    fi
+  '';
+
   # Claude Code and Codex write their own plugin state, so install through
   # their CLIs, only what is missing. Plugins added by hand are left alone.
-  home.activation.installAgentPlugins = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+  home.activation.installAgentPlugins = lib.hm.dag.entryAfter [ "installAgentCLIs" ] ''
     claude="$HOME/.local/bin/claude"
     codex="$HOME/.local/bin/codex"
 

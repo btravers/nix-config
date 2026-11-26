@@ -77,7 +77,6 @@ step 5 (no vault or AI agents there) and the app steps in step 4.
      Security → Accessibility when they ask.
    - In Raycast, set the hotkey to `Cmd+Space` (Spotlight's shortcut is
      already turned off).
-   - Install Claude Code: `curl -fsSL https://claude.ai/install.sh | bash`
    - **Create this Mac's SSH key** in **Secretive** (installed by the
      config): open it, click **+**, name the key after the host (e.g. `pro`)
      and keep "Require authentication" on. The key never leaves the Secure
@@ -202,10 +201,12 @@ This configuration is organized into modular components:
 
 ## 🤖 AI Coding CLIs (outside Nix)
 
-`claude` (Claude Code) and `codex` are installed with their vendors' native
-installers into `~/.local/bin` and update themselves. They are deliberately
-not managed here, because nixpkgs and the pinned Homebrew taps lag behind
-their release cadence.
+`claude` (Claude Code) and `codex` come from their vendors' native installers
+into `~/.local/bin` and update themselves. Nix doesn't package them, because
+nixpkgs and the pinned Homebrew taps lag behind their release cadence. On
+workstations, a rebuild runs each installer once if the CLI is missing
+(`home-manager/_mixins/development/agents.nix`), so a new Mac gets both
+without a manual step.
 
 **Option if this changes:** [`numtide/llm-agents.nix`](https://github.com/numtide/llm-agents.nix)
 packages `claude-code`, `codex`, `opencode` and others, is updated daily, and

@@ -69,9 +69,9 @@ main() {
   2. gh auth login
      git -C ~/.config/nix-darwin remote set-url origin git@github.com:btravers/nix-config.git
   3. Workstations only: allow AeroSpace and Raycast in Accessibility, set the
-     Raycast hotkey to Cmd+Space, install Claude Code
-     (curl -fsSL https://claude.ai/install.sh | bash), then run
-     `nh darwin switch` again to clone the vault and register MCP servers.
+     Raycast hotkey to Cmd+Space, create this Mac's key in Secretive and add
+     it to GitHub (see README), then run `nh darwin switch` again to clone
+     the vault. Claude Code and Codex are already installed.
 EOF
 }
 
