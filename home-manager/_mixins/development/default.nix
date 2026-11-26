@@ -4,6 +4,7 @@
   # Project toolchains (languages, CLIs, databases) live in each project's
   # devShell, loaded by direnv. Run one-off tools with `, <cmd>` (comma).
   imports = [
+    ./agents.nix
     ./brain.nix
     ./containers.nix
     ./mcp.nix
