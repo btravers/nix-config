@@ -96,7 +96,6 @@ This configuration follows a modular, composable architecture designed for maint
 │       │   ├── bat.nix              # bat (cat alternative)
 │       │   ├── eza.nix              # eza (ls alternative)
 │       │   ├── fzf.nix              # Fuzzy finder
-│       │   ├── starship.nix         # Prompt
 │       │   ├── tmux.nix             # Terminal multiplexer
 │       │   ├── zsh.nix              # Shell configuration
 │       │   └── ...                  # One file per tool

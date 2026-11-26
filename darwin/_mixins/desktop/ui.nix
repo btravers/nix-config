@@ -14,6 +14,12 @@
     NSAutomaticDashSubstitutionEnabled = false;
   };
 
+  # English UI, French region formats (metric, €, 24h, dd/mm).
+  system.defaults.CustomUserPreferences.NSGlobalDomain = {
+    AppleLanguages = [ "en-US" ];
+    AppleLocale = "en_FR";
+  };
+
   system.defaults.SoftwareUpdate.AutomaticallyInstallMacOSUpdates = true;
 
   system.defaults.CustomUserPreferences."com.apple.WindowManager" = {
