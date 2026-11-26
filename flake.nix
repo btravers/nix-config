@@ -45,7 +45,8 @@
     };
 
     catppuccin = {
-      url = "github:catppuccin/nix";
+      # Track the release branch matching nixpkgs (26.05); main targets unstable.
+      url = "github:catppuccin/nix/release-26.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };

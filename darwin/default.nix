@@ -75,6 +75,7 @@
       "ghostty"
       "google-chrome"
       "intellij-idea"
+      "lm-studio"
       "obsidian"
       "ollama-app"
       "nikitabobko/tap/aerospace"
