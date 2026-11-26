@@ -14,7 +14,6 @@
     ./htop.nix
     ./jq.nix
     ./nh.nix
-    ./opencode.nix
     ./ripgrep.nix
     ./starship.nix
     ./zellij.nix

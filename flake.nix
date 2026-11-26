@@ -41,6 +41,10 @@
       url = "github:TheBoredTeam/homebrew-boring-notch";
       flake = false;
     };
+    homebrew-openai-tools = {
+      url = "github:openai/homebrew-tools";
+      flake = false;
+    };
     homebrew-aerospace = {
       url = "github:nikitabobko/homebrew-tap";
       flake = false;
@@ -72,8 +76,9 @@
     in
     {
       darwinConfigurations = {
-        macbook-air = helpers.mkDarwin { hostname = "macbook-air"; };
-        macbook-pro = helpers.mkDarwin { hostname = "macbook-pro"; };
+        air = helpers.mkDarwin { hostname = "air"; };
+        pro = helpers.mkDarwin { hostname = "pro"; };
+        runner = helpers.mkDarwin { hostname = "runner"; };
       };
 
       devShells.${system}.default =

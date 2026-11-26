@@ -75,22 +75,26 @@ This configuration follows a modular, composable architecture designed for maint
 ├── darwin/                          # macOS system-level configuration
 │   ├── default.nix                  # Shared darwin config (all machines)
 │   ├── _mixins/
+│   │   ├── workstation.nix          # air + pro: desktop, apps, home-manager/workstation.nix
 │   │   ├── desktop/                 # Desktop environment settings
 │   │   │   ├── default.nix          # Auto-imports all desktop mixins
 │   │   │   ├── dock.nix             # Dock configuration
 │   │   │   ├── finder.nix           # Finder settings
 │   │   │   ├── keyboard.nix         # Keyboard settings
+│   │   │   ├── power.nix            # No sleep on charger
 │   │   │   ├── trackpad.nix         # Trackpad settings
 │   │   │   └── ui.nix               # UI/UX settings
 │   │   └── features/                # Feature modules
 │   │       ├── nix-registry.nix     # Flake registry pinning
 │   │       ├── nix-homebrew.nix     # Homebrew configuration
 │   │       └── nix-gc.nix           # Weekly nh clean (generations + store GC)
-│   └── <hostname>/                  # Per-host overrides (optional)
-│       └── default.nix              # Host-specific config
+│   ├── air/                         # MacBook Air: French keyboard, workstation
+│   ├── pro/                         # MacBook Pro: US keyboard, workstation
+│   └── runner/                      # Old MacBook Pro: GitHub runner (tart), minimal
 │
 ├── home-manager/                    # User environment configuration
-│   ├── default.nix                  # Home-manager entry point
+│   ├── default.nix                  # Every host: terminal tools, git
+│   ├── workstation.nix              # air + pro: desktop configs, agents, brain
 │   └── _mixins/
 │       ├── terminal/                # CLI tools
 │       │   ├── default.nix          # Auto-imports all terminal tools
@@ -107,6 +111,7 @@ This configuration follows a modular, composable architecture designed for maint
 │       │   ├── containers.nix       # Colima + docker CLI
 │       │   ├── brain.nix            # mcp-brain: vault clone, sync, MCP server
 │       │   ├── mcp.nix              # Registers MCP servers with every agent
+│       │   ├── opencode.nix         # opencode + its MCP servers
 │       │   └── ...
 │       ├── desktop/                 # GUI applications
 │       │   ├── ghostty.nix          # Terminal emulator config
@@ -348,8 +353,10 @@ To add a new machine to this configuration:
 
 2. **(Optional) Add host-specific config**:
    - Create `darwin/new-hostname/default.nix`
+   - Import `../_mixins/workstation.nix` for a daily-driver Mac (leave it out
+     for a headless one, like `darwin/runner/`)
    - Add any machine-specific overrides, including the keyboard layout
-     (`com.apple.HIToolbox`; see `darwin/macbook-air/default.nix`)
+     (`com.apple.HIToolbox`; see `darwin/air/default.nix`)
 
 3. **Deploy**:
    ```sh
@@ -404,7 +411,7 @@ environment.systemPackages = with pkgs; [
 
 ### GUI Application (Homebrew Cask)
 
-Add to `darwin/default.nix`:
+Add to `darwin/_mixins/workstation.nix` (or a host's `default.nix`):
 
 ```nix
 homebrew.casks = [

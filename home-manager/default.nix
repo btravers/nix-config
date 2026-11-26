@@ -1,10 +1,9 @@
 { username, ... }:
 {
+  # Every host, the runner included. Desktop apps, agents and brain come from
+  # ./workstation.nix (via darwin/_mixins/workstation.nix).
   imports = [
-    ./_mixins/desktop/aerospace.nix
-    ./_mixins/desktop/ghostty.nix
-    ./_mixins/desktop/zed.nix
-    ./_mixins/development # Auto-imports default.nix which imports all dev modules
+    ./_mixins/development/git.nix
     ./_mixins/terminal
     ./_mixins/users/${username}
   ];

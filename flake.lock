@@ -256,6 +256,22 @@
         "type": "github"
       }
     },
+    "homebrew-openai-tools": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1795564044,
+        "narHash": "sha256-CmuAHIbwH9iYDOMmoOp3fddQA5Q0X4EQLX5bBxmi5C0=",
+        "owner": "openai",
+        "repo": "homebrew-tools",
+        "rev": "63b84db62e097228cb13da9c08a89f7254b2b44a",
+        "type": "github"
+      },
+      "original": {
+        "owner": "openai",
+        "repo": "homebrew-tools",
+        "type": "github"
+      }
+    },
     "mcp-brain": {
       "inputs": {
         "nixpkgs": [
@@ -428,6 +444,7 @@
         "homebrew-boring-notch": "homebrew-boring-notch",
         "homebrew-cask": "homebrew-cask",
         "homebrew-core": "homebrew-core",
+        "homebrew-openai-tools": "homebrew-openai-tools",
         "mcp-brain": "mcp-brain",
         "nix-darwin": "nix-darwin",
         "nix-homebrew": "nix-homebrew",

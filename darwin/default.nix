@@ -7,7 +7,6 @@
 }:
 {
   imports = [
-    ./_mixins/desktop
     ./_mixins/features/nix-registry.nix
     ./_mixins/features/nix-homebrew.nix
     ./_mixins/features/nix-gc.nix
@@ -68,33 +67,5 @@
     onActivation.cleanup = "zap";
     onActivation.upgrade = true;
     taps = builtins.attrNames config.nix-homebrew.taps;
-    brews = [
-      "gdb"
-      "lsusb"
-      "minicom"
-      "sdl2"
-    ];
-    casks = [
-      "autodesk-fusion"
-      "bambu-connect"
-      "bambu-studio"
-      "chatgpt"
-      "claude"
-      "cyberghost-vpn"
-      "firefox@developer-edition"
-      "font-jetbrains-mono-nerd-font"
-      "ghostty"
-      "google-chrome"
-      "intellij-idea"
-      "lm-studio"
-      "obsidian"
-      "ollama-app"
-      "nikitabobko/tap/aerospace"
-      "raycast"
-      "slack"
-      "spotify"
-      "whatsapp"
-      "zed"
-    ];
   };
 }

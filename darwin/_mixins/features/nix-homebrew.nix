@@ -22,7 +22,6 @@
     taps = {
       "homebrew/homebrew-core" = inputs.homebrew-core;
       "homebrew/homebrew-cask" = inputs.homebrew-cask;
-      "nikitabobko/homebrew-tap" = inputs.homebrew-aerospace;
     };
     mutableTaps = false;
     # ponytail: workaround for zhaofengli/nix-homebrew#187 (generated bin/brew

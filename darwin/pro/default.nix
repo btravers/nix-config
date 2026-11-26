@@ -7,6 +7,8 @@ let
   };
 in
 {
+  imports = [ ../_mixins/workstation.nix ];
+
   system.defaults.CustomUserPreferences."com.apple.HIToolbox" = {
     AppleEnabledInputSources = [ layout ];
     AppleSelectedInputSources = [ layout ];

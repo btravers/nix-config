@@ -20,8 +20,14 @@ A modular, maintainable nix-darwin configuration for macOS following best practi
 
 ### Set Up a New Mac
 
-Hosts: `macbook-air` (French AZERTY keyboard) and `macbook-pro` (US ANSI
-keyboard). Replace `macbook-pro` below with the machine you are setting up.
+| Host | Machine | Profile |
+|---|---|---|
+| `air` | MacBook Air, French AZERTY keyboard | workstation |
+| `pro` | MacBook Pro, US ANSI keyboard | workstation |
+| `runner` | Old MacBook Pro, GitHub Actions runner | minimal: tart, gh, python, never sleeps (even with the lid closed) |
+
+Replace `pro` below with the machine you are setting up. On `runner`, skip
+step 8 (no vault or AI agents there) and the app steps in step 7.
 
 1. **Finish the macOS setup assistant.** Create the account `btravers` as the
    first user on the machine (the config expects uid 501), sign in with your
@@ -50,7 +56,7 @@ keyboard). Replace `macbook-pro` below with the machine you are setting up.
    Activation sets the hostname, so later runs find it on their own:
    ```sh
    cd ~/.config/nix-darwin
-   nix develop --command sudo darwin-rebuild switch --flake .#macbook-pro
+   nix develop --command sudo darwin-rebuild switch --flake .#pro
    ```
    If activation stops on *unexpected files in /etc*, rename each file it
    lists (e.g. `sudo mv /etc/zshrc /etc/zshrc.before-nix-darwin`) and run it again.
@@ -141,10 +147,11 @@ This configuration is organized into modular components:
 ├── flake.nix              # Dependency management and machine definitions
 ├── darwin/                # macOS system configuration
 │   ├── default.nix        # Shared system settings
-│   ├── _mixins/           # Modular system configs
-│   └── <hostname>/        # Per-host overrides
+│   ├── _mixins/           # Modular system configs (workstation.nix: air + pro)
+│   └── <hostname>/        # Per-host config: air, pro, runner
 ├── home-manager/          # User environment configuration
-│   ├── default.nix        # Home-manager entry point
+│   ├── default.nix        # Every host: terminal tools, git
+│   ├── workstation.nix    # air + pro: desktop configs, agents, brain
 │   └── _mixins/           # Modular user configs
 │       ├── terminal/      # CLI tools (one file per tool)
 │       ├── development/   # Development tools
