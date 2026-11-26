@@ -96,11 +96,12 @@ step 5 (no vault or AI agents there) and the app steps in step 4.
      `"key::"` followed by the contents of the `.pub` file, and commit it.
    - Sign in to your apps (Slack, Obsidian, Spotify, …).
 
-5. **Apply the configuration again** now that GitHub SSH works:
+5. **Apply the configuration again** now that you are logged in to GitHub:
    ```sh
    nh darwin switch
    ```
-   This clones the vault into `~/Obsidian/btravers` and registers the `brain`
+   This clones the vault into `~/Obsidian/btravers` (over HTTPS, through
+   `gh`, so its sync never asks for Touch ID) and registers the `brain`
    MCP server with Claude Code, Codex, Claude Desktop, opencode and Zed. The
    vault then syncs every 15 minutes (log: `~/Library/Logs/mcp-brain-sync.log`).
    Restart the agents to pick the server up.
