@@ -256,6 +256,27 @@
         "type": "github"
       }
     },
+    "mcp-brain": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "rust-overlay": "rust-overlay"
+      },
+      "locked": {
+        "lastModified": 1795713538,
+        "narHash": "sha256-c9yxrQtiHCCVORVjTpf7gd060qriBz8wRRVx9X91g6s=",
+        "owner": "btravers",
+        "repo": "mcp-brain",
+        "rev": "0955fffa6ca079de3277c1d4f9db051d943555ee",
+        "type": "github"
+      },
+      "original": {
+        "owner": "btravers",
+        "repo": "mcp-brain",
+        "type": "github"
+      }
+    },
     "nix": {
       "inputs": {
         "bdwgc": "bdwgc",
@@ -407,10 +428,32 @@
         "homebrew-boring-notch": "homebrew-boring-notch",
         "homebrew-cask": "homebrew-cask",
         "homebrew-core": "homebrew-core",
+        "mcp-brain": "mcp-brain",
         "nix-darwin": "nix-darwin",
         "nix-homebrew": "nix-homebrew",
         "nix-index-database": "nix-index-database",
         "nixpkgs": "nixpkgs_2"
+      }
+    },
+    "rust-overlay": {
+      "inputs": {
+        "nixpkgs": [
+          "mcp-brain",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1795253373,
+        "narHash": "sha256-Vg6Sg8gJCDG9qpVEdOZX+72Z50MLwdnwtfZ8FNBwiYI=",
+        "owner": "oxalica",
+        "repo": "rust-overlay",
+        "rev": "52db20539ec0ba063479d66092992d9efcf456ff",
+        "type": "github"
+      },
+      "original": {
+        "owner": "oxalica",
+        "repo": "rust-overlay",
+        "type": "github"
       }
     }
   },

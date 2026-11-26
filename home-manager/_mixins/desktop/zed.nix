@@ -1,4 +1,9 @@
-{ pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 {
   home.packages = [ pkgs.nil ];
 
@@ -17,6 +22,7 @@
         light = "One Light";
         dark = "Catppuccin Mocha";
       };
+      context_servers = lib.mapAttrs (_: s: { inherit (s) command args; }) config.programs.mcp.servers;
       terminal = {
         shell = {
           program = "/bin/zsh";

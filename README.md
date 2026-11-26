@@ -71,10 +71,28 @@ keyboard). Replace `macbook-pro` below with the machine you are setting up.
      ```
    - Sign in to your apps (Slack, Obsidian, Spotify, …).
 
+8. **Apply the configuration again** now that GitHub SSH works:
+   ```sh
+   nh darwin switch
+   ```
+   This clones the vault into `~/Obsidian/btravers` and registers the `brain`
+   MCP server with Claude Code, Codex, Claude Desktop, opencode and Zed. The
+   vault then syncs every 15 minutes (log: `~/Library/Logs/mcp-brain-sync.log`).
+   Restart the agents to pick the server up.
+
 To add a machine with a new hostname, see
 [Adding a New Machine](./DEVELOPMENT.md#adding-a-new-machine). Machines other
 than `macbook-air` get the US keyboard layout; change that in
 `darwin/_mixins/desktop/keyboard.nix`.
+
+### MCP Servers
+
+`programs.mcp.servers` (Home Manager) is the single list of MCP servers. Each
+rebuild registers every server with Claude Code, Codex and Claude Desktop
+(`home-manager/_mixins/development/mcp.nix`), and writes them into the Zed and
+opencode configs. `brain` (`development/brain.nix`) is built from the
+[mcp-brain](https://github.com/btravers/mcp-brain) flake input; update it with
+`nix flake update mcp-brain`.
 
 ### Daily Use
 

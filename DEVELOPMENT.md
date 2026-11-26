@@ -105,6 +105,8 @@ This configuration follows a modular, composable architecture designed for maint
 │       ├── development/             # Development tools
 │       │   ├── git.nix              # Git configuration
 │       │   ├── containers.nix       # Colima + docker CLI
+│       │   ├── brain.nix            # mcp-brain: vault clone, sync, MCP server
+│       │   ├── mcp.nix              # Registers MCP servers with every agent
 │       │   └── ...
 │       ├── desktop/                 # GUI applications
 │       │   ├── ghostty.nix          # Terminal emulator config

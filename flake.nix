@@ -51,6 +51,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # MCP server for the Obsidian vault (home-manager/_mixins/development/brain.nix).
+    mcp-brain = {
+      url = "github:btravers/mcp-brain";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     catppuccin = {
       # Track the release branch matching nixpkgs (26.05); main targets unstable.
       url = "github:catppuccin/nix/release-26.05";
