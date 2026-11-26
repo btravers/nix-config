@@ -41,6 +41,9 @@ main() {
   fi
 
   step "Switch to $host"
+  cd "$dir"
+  # The darwin-rebuild pinned in flake.lock, run by full path: sudo resets PATH.
+  rebuild=$(nix build --no-link --print-out-paths --inputs-from . nix-darwin#darwin-rebuild)
   # nix-darwin refuses to overwrite shell files it did not write; set them aside
   # (what it would ask you to do), and put them back if the switch fails early.
   for f in bashrc zshrc zshenv; do
@@ -48,8 +51,7 @@ main() {
       sudo mv "/etc/$f" "/etc/$f.before-nix-darwin"
     fi
   done
-  cd "$dir"
-  if ! nix develop --command sudo darwin-rebuild switch --flake ".#$host"; then
+  if ! sudo "$rebuild/bin/darwin-rebuild" switch --flake ".#$host"; then
     for f in bashrc zshrc zshenv; do
       if [ ! -e "/etc/$f" ] && [ -f "/etc/$f.before-nix-darwin" ]; then
         sudo mv "/etc/$f.before-nix-darwin" "/etc/$f"

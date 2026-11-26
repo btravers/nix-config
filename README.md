@@ -61,7 +61,8 @@ step 5 (no vault or AI agents there) and the app steps in step 4.
    # open a new terminal
    git clone https://github.com/btravers/nix-config.git ~/.config/nix-darwin
    cd ~/.config/nix-darwin
-   nix develop --command sudo darwin-rebuild switch --flake .#pro
+   rebuild=$(nix build --no-link --print-out-paths --inputs-from . nix-darwin#darwin-rebuild)
+   sudo "$rebuild/bin/darwin-rebuild" switch --flake .#pro
    ```
    If activation stops on *unexpected files in /etc*, rename each file it
    lists (e.g. `sudo mv /etc/zshrc /etc/zshrc.before-nix-darwin`) and run it

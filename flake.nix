@@ -95,7 +95,8 @@
               text = ''
                 echo "> Applying nix-darwin configuration..."
                 echo "> Running darwin-rebuild switch as root..."
-                sudo darwin-rebuild switch --flake .
+                # Full path: sudo resets PATH, so runtimeInputs would not reach it.
+                sudo ${inputs.nix-darwin.packages.${system}.darwin-rebuild}/bin/darwin-rebuild switch --flake .
                 echo "> darwin-rebuild switch was successful ✅"
                 echo "> macOS config was successfully applied 🚀"
               '';
