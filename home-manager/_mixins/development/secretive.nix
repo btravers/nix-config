@@ -32,7 +32,7 @@ in
       "${home}/.ssh/config.local"
     ];
     # Every app that runs ssh, GUI ones too.
-    matchBlocks."*".identityAgent = socket;
+    settings."*".IdentityAgent = socket;
   };
 
   # Each host sets programs.git.signing.key to its Secretive public key
