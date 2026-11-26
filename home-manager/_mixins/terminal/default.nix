@@ -13,6 +13,7 @@
     ./gh.nix
     ./htop.nix
     ./jq.nix
+    ./nh.nix
     ./opencode.nix
     ./ripgrep.nix
     ./starship.nix

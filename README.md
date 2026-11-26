@@ -18,16 +18,87 @@ A modular, maintainable nix-darwin configuration for macOS following best practi
 
 ## 🚀 Quick Start
 
-### First Time Setup
+### Set Up a New Mac
+
+Hosts: `macbook-air` (French AZERTY keyboard) and `macbook-pro` (US ANSI
+keyboard). Replace `macbook-pro` below with the machine you are setting up.
+
+1. **Finish the macOS setup assistant.** Create the account `btravers` as the
+   first user on the machine (the config expects uid 501), sign in with your
+   Apple ID, and install pending macOS updates.
+
+2. **Install the command line tools and Rosetta:**
+   ```sh
+   xcode-select --install
+   softwareupdate --install-rosetta --agree-to-license
+   ```
+
+3. **Install Determinate Nix**, then open a new terminal:
+   ```sh
+   curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install
+   ```
+
+4. **Clone this repository** (HTTPS, since there is no SSH key yet):
+   ```sh
+   git clone https://github.com/btravers/nix-config.git ~/.config/nix-darwin
+   ```
+   If the repository is private, authenticate first with
+   `nix run nixpkgs#gh -- auth login`, then clone with
+   `nix run nixpkgs#gh -- repo clone btravers/nix-config ~/.config/nix-darwin`.
+
+5. **Apply the configuration.** Name the host explicitly on the first run.
+   Activation sets the hostname, so later runs find it on their own:
+   ```sh
+   cd ~/.config/nix-darwin
+   nix develop --command sudo darwin-rebuild switch --flake .#macbook-pro
+   ```
+   If activation stops on *unexpected files in /etc*, rename each file it
+   lists (e.g. `sudo mv /etc/zshrc /etc/zshrc.before-nix-darwin`) and run it again.
+
+6. **Log out and back in.** The language, keyboard layout and menu bar clock
+   only change at login.
+
+7. **Finish by hand** (things Nix can't do):
+   - Allow **AeroSpace** and **Raycast** in System Settings → Privacy &
+     Security → Accessibility when they ask.
+   - In Raycast, set the hotkey to `Cmd+Space` (Spotlight's shortcut is
+     already turned off).
+   - Install Claude Code: `curl -fsSL https://claude.ai/install.sh | bash`
+   - Log in to GitHub and switch this repository to SSH:
+     ```sh
+     gh auth login
+     git -C ~/.config/nix-darwin remote set-url origin git@github.com:btravers/nix-config.git
+     ```
+   - Sign in to your apps (Slack, Obsidian, Spotify, …).
+
+To add a machine with a new hostname, see
+[Adding a New Machine](./DEVELOPMENT.md#adding-a-new-machine). Machines other
+than `macbook-air` get the US keyboard layout; change that in
+`darwin/_mixins/desktop/keyboard.nix`.
+
+### Daily Use
 
 ```sh
-# Clone this repository
-git clone <your-repo> ~/.config/nix-darwin
-cd ~/.config/nix-darwin
-
-# Apply the configuration
-sudo darwin-rebuild switch --flake ~/.config/nix-darwin
+nh darwin switch                      # rebuild and apply, showing what changed
+nix flake update && nh darwin switch  # update everything (nixpkgs, Homebrew taps, …)
 ```
+
+Old generations are cleaned every Sunday (`darwin/_mixins/features/nix-gc.nix`).
+To clean right away: `sudo nh clean all --keep-since 14d`.
+
+### Keyboard Shortcuts
+
+| Keys | What it does |
+|---|---|
+| `Ctrl+Alt+h/j/k/l` | AeroSpace: focus window left/down/up/right |
+| `Ctrl+Alt+Shift+h/j/k/l` | AeroSpace: move window |
+| `Ctrl+Alt+1…9` / `Ctrl+Alt+Shift+1…9` | AeroSpace: go to / move window to workspace |
+| `Cmd+n` | New Ghostty window (each one runs its own Zellij session) |
+| `Cmd+t` | New Zellij tab |
+| `Ctrl+g` | Unlock Zellij, then `Ctrl+p` panes, `Ctrl+t` tabs, `Ctrl+s` scroll, `Ctrl+o` session; `Ctrl+g` again to lock |
+
+AeroSpace uses `Ctrl+Alt` rather than `Alt` because on the French layout
+`Alt` (Option) types `{`, `[` and `|`.
 
 ### Development Workflow
 

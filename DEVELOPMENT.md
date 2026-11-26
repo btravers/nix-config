@@ -84,7 +84,8 @@ This configuration follows a modular, composable architecture designed for maint
 │   │   │   └── ui.nix               # UI/UX settings
 │   │   └── features/                # Feature modules
 │   │       ├── nix-registry.nix     # Flake registry pinning
-│   │       └── nix-homebrew.nix     # Homebrew configuration
+│   │       ├── nix-homebrew.nix     # Homebrew configuration
+│   │       └── nix-gc.nix           # Weekly nh clean (generations + store GC)
 │   └── <hostname>/                  # Per-host overrides (optional)
 │       └── default.nix              # Host-specific config
 │
@@ -96,6 +97,7 @@ This configuration follows a modular, composable architecture designed for maint
 │       │   ├── bat.nix              # bat (cat alternative)
 │       │   ├── eza.nix              # eza (ls alternative)
 │       │   ├── fzf.nix              # Fuzzy finder
+│       │   ├── nh.nix               # nh darwin switch / clean
 │       │   ├── starship.nix         # Prompt
 │       │   ├── zellij.nix           # Terminal multiplexer
 │       │   ├── zsh.nix              # Shell configuration

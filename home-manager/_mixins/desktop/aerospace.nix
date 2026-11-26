@@ -31,69 +31,70 @@
       outer.top = 10
       outer.right = 10
 
-      # Main mode bindings
+      # Main mode bindings. ctrl-alt, not alt: on the French layout alt (Option)
+      # types { [ | and other symbols, which plain alt bindings would swallow.
       [mode.main.binding]
 
       # Focus windows
-      alt-h = 'focus left'
-      alt-j = 'focus down'
-      alt-k = 'focus up'
-      alt-l = 'focus right'
+      ctrl-alt-h = 'focus left'
+      ctrl-alt-j = 'focus down'
+      ctrl-alt-k = 'focus up'
+      ctrl-alt-l = 'focus right'
 
       # Move windows
-      alt-shift-h = 'move left'
-      alt-shift-j = 'move down'
-      alt-shift-k = 'move up'
-      alt-shift-l = 'move right'
+      ctrl-alt-shift-h = 'move left'
+      ctrl-alt-shift-j = 'move down'
+      ctrl-alt-shift-k = 'move up'
+      ctrl-alt-shift-l = 'move right'
 
       # Resize windows
-      alt-shift-n = 'resize smart -50'
-      alt-shift-p = 'resize smart +50'
+      ctrl-alt-shift-n = 'resize smart -50'
+      ctrl-alt-shift-p = 'resize smart +50'
 
       # Layout commands
-      alt-t = 'layout tiles horizontal vertical'
-      alt-s = 'layout accordion horizontal vertical'
-      alt-f = 'fullscreen'
+      ctrl-alt-t = 'layout tiles horizontal vertical'
+      ctrl-alt-s = 'layout accordion horizontal vertical'
+      ctrl-alt-f = 'fullscreen'
 
       # Float
-      alt-shift-f = 'layout floating tiling'
+      ctrl-alt-shift-f = 'layout floating tiling'
 
       # Switch workspaces
-      alt-1 = 'workspace 1'
-      alt-2 = 'workspace 2'
-      alt-3 = 'workspace 3'
-      alt-4 = 'workspace 4'
-      alt-5 = 'workspace 5'
-      alt-6 = 'workspace 6'
-      alt-7 = 'workspace 7'
-      alt-8 = 'workspace 8'
-      alt-9 = 'workspace 9'
-      
+      ctrl-alt-1 = 'workspace 1'
+      ctrl-alt-2 = 'workspace 2'
+      ctrl-alt-3 = 'workspace 3'
+      ctrl-alt-4 = 'workspace 4'
+      ctrl-alt-5 = 'workspace 5'
+      ctrl-alt-6 = 'workspace 6'
+      ctrl-alt-7 = 'workspace 7'
+      ctrl-alt-8 = 'workspace 8'
+      ctrl-alt-9 = 'workspace 9'
+
       # Cycle through workspaces
-      alt-tab = 'workspace next'
-      alt-shift-tab = 'workspace prev'
+      ctrl-alt-tab = 'workspace next'
+      ctrl-alt-shift-tab = 'workspace prev'
 
       # Move windows to workspaces
-      alt-shift-1 = 'move-node-to-workspace 1'
-      alt-shift-2 = 'move-node-to-workspace 2'
-      alt-shift-3 = 'move-node-to-workspace 3'
-      alt-shift-4 = 'move-node-to-workspace 4'
-      alt-shift-5 = 'move-node-to-workspace 5'
-      alt-shift-6 = 'move-node-to-workspace 6'
-      alt-shift-7 = 'move-node-to-workspace 7'
-      alt-shift-8 = 'move-node-to-workspace 8'
-      alt-shift-9 = 'move-node-to-workspace 9'
+      ctrl-alt-shift-1 = 'move-node-to-workspace 1'
+      ctrl-alt-shift-2 = 'move-node-to-workspace 2'
+      ctrl-alt-shift-3 = 'move-node-to-workspace 3'
+      ctrl-alt-shift-4 = 'move-node-to-workspace 4'
+      ctrl-alt-shift-5 = 'move-node-to-workspace 5'
+      ctrl-alt-shift-6 = 'move-node-to-workspace 6'
+      ctrl-alt-shift-7 = 'move-node-to-workspace 7'
+      ctrl-alt-shift-8 = 'move-node-to-workspace 8'
+      ctrl-alt-shift-9 = 'move-node-to-workspace 9'
 
       # Service mode (for reloading config, etc.)
-      alt-shift-r = 'mode service'
+      ctrl-alt-shift-r = 'mode service'
 
       [mode.service.binding]
       esc = ['reload-config', 'mode main']
       r = ['flatten-workspace-tree', 'mode main']
-      alt-shift-h = ['join-with left', 'mode main']
-      alt-shift-j = ['join-with down', 'mode main']
-      alt-shift-k = ['join-with up', 'mode main']
-      alt-shift-l = ['join-with right', 'mode main']
+      ctrl-alt-shift-h = ['join-with left', 'mode main']
+      ctrl-alt-shift-j = ['join-with down', 'mode main']
+      ctrl-alt-shift-k = ['join-with up', 'mode main']
+      ctrl-alt-shift-l = ['join-with right', 'mode main']
     '';
   };
 }

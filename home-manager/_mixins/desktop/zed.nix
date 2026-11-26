@@ -29,7 +29,6 @@
         just = true;
         nix = true;
         oxc = true;
-        # New extensions for React + Rust stack
         rust = true;
         toml = true;
         typescript = true;
