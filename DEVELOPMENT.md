@@ -112,6 +112,7 @@ This configuration follows a modular, composable architecture designed for maint
 │       │   ├── brain.nix            # mcp-brain: vault clone, sync, MCP server
 │       │   ├── mcp.nix              # Registers MCP servers with every agent
 │       │   ├── opencode.nix         # opencode + its MCP servers
+│       │   ├── secretive.nix        # SSH agent (Secure Enclave), git signing
 │       │   └── ...
 │       ├── desktop/                 # GUI applications
 │       │   ├── ghostty.nix          # Terminal emulator config

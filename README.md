@@ -77,11 +77,23 @@ step 5 (no vault or AI agents there) and the app steps in step 4.
    - In Raycast, set the hotkey to `Cmd+Space` (Spotlight's shortcut is
      already turned off).
    - Install Claude Code: `curl -fsSL https://claude.ai/install.sh | bash`
-   - Log in to GitHub and switch this repository to SSH:
+   - **Create this Mac's SSH key** in **Secretive** (installed by the
+     config): open it, click **+**, name the key after the host (e.g. `pro`)
+     and keep "Require authentication" on. The key never leaves the Secure
+     Enclave; every use asks for Touch ID. Workstations only; on `runner`,
+     `gh auth login` is enough.
+   - Log in to GitHub, add the key for login and for commit signing, and
+     switch this repository to SSH:
      ```sh
      gh auth login
+     key=$(ls ~/Library/Containers/com.maxgoedjen.Secretive.SecretAgent/Data/PublicKeys/*.pub)
+     gh ssh-key add "$key" --type authentication --title "$(hostname)"
+     gh ssh-key add "$key" --type signing --title "$(hostname)"
      git -C ~/.config/nix-darwin remote set-url origin git@github.com:btravers/nix-config.git
      ```
+   - Turn on commit signing with that key: in `darwin/<hostname>/default.nix`,
+     set `home-manager.users.btravers.programs.git.signing.key` to
+     `"key::"` followed by the contents of the `.pub` file, and commit it.
    - Sign in to your apps (Slack, Obsidian, Spotify, …).
 
 5. **Apply the configuration again** now that GitHub SSH works:
@@ -96,6 +108,16 @@ step 5 (no vault or AI agents there) and the app steps in step 4.
 To add a machine with a new hostname, see
 [Adding a New Machine](./DEVELOPMENT.md#adding-a-new-machine). Each host sets
 its keyboard layout in `darwin/<hostname>/default.nix`.
+
+### SSH Keys and Secrets
+
+Each workstation has its own SSH key in its Secure Enclave, managed by
+Secretive (`home-manager/_mixins/development/secretive.nix`). Nothing to sync
+or back up: on a new Mac, create a new key. If you lose a Mac, delete its keys at
+github.com/settings/keys. Passwords live in Apple Passwords.
+
+`~/.ssh/config` is generated. Put machine-only hosts (client servers, old key
+files) in `~/.ssh/config.local`, which it includes and git never sees.
 
 ### MCP Servers
 

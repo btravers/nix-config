@@ -32,6 +32,7 @@
       "ollama-app"
       "nikitabobko/tap/aerospace"
       "raycast"
+      "secretive"
       "slack"
       "spotify"
       "whatsapp"

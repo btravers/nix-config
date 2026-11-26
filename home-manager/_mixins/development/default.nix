@@ -8,5 +8,6 @@
     ./containers.nix
     ./mcp.nix
     ./opencode.nix
+    ./secretive.nix
   ];
 }
