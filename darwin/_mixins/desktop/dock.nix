@@ -9,7 +9,7 @@
     show-recents = false;
     mru-spaces = false;
     persistent-apps = [
-      "/Applications/Firefox.app"
+      "/Applications/Firefox Developer Edition.app"
       "/Applications/Zed.app"
       "/Applications/Ghostty.app"
       "/Applications/Claude.app"

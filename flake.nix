@@ -19,9 +19,16 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # Brew version comes from nix-homebrew's own lock; update nix-homebrew
-    # together with the taps (`nix flake update`) so brew understands their DSL.
-    nix-homebrew.url = "github:zhaofengli/nix-homebrew";
+    nix-homebrew = {
+      url = "github:zhaofengli/nix-homebrew";
+      inputs.brew-src.follows = "brew-src";
+    };
+    # brew must be at least as new as the taps' DSL; nix-homebrew's bundled brew
+    # lags behind. Bump this tag (latest Homebrew/brew release) with the taps.
+    brew-src = {
+      url = "github:Homebrew/brew/7.0.16";
+      flake = false;
+    };
     homebrew-core = {
       url = "github:homebrew/homebrew-core";
       flake = false;
@@ -54,14 +61,13 @@
   outputs =
     { self, ... }@inputs:
     let
-      username = "btravers";
       system = "aarch64-darwin";
       helpers = import ./lib/helpers.nix { inherit inputs; };
     in
     {
-      darwinConfigurations.${username} = helpers.mkDarwin {
-        hostname = username;
-        inherit username;
+      darwinConfigurations = {
+        macbook-air = helpers.mkDarwin { hostname = "macbook-air"; };
+        macbook-pro = helpers.mkDarwin { hostname = "macbook-pro"; };
       };
 
       devShells.${system}.default =
@@ -99,7 +105,7 @@
               runtimeInputs = [ nvd ];
               text = ''
                 echo "> Building new configuration..."
-                nix build .#darwinConfigurations.${username}.system --out-link /tmp/nix-darwin-new
+                nix build ".#darwinConfigurations.$(scutil --get LocalHostName).system" --out-link /tmp/nix-darwin-new
                 echo "> Comparing with current system..."
                 nvd diff /run/current-system /tmp/nix-darwin-new
                 rm /tmp/nix-darwin-new

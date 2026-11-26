@@ -102,7 +102,7 @@ This configuration follows a modular, composable architecture designed for maint
 │       │   └── ...                  # One file per tool
 │       ├── development/             # Development tools
 │       │   ├── git.nix              # Git configuration
-│       │   ├── rust.nix             # Rust toolchain
+│       │   ├── containers.nix       # Colima + docker CLI
 │       │   └── ...
 │       ├── desktop/                 # GUI applications
 │       │   ├── ghostty.nix          # Terminal emulator config
@@ -142,7 +142,7 @@ Replace imperative activation scripts with declarative home-manager modules:
   - Each file configures one tool completely
 
 - **Development tools**: Language/tooling in `_mixins/development/`
-  - Examples: `git.nix`, `rust.nix`, `node.nix`
+  - Examples: `git.nix`, `containers.nix`, `comma.nix`
 
 - **Desktop apps**: GUI configs in `_mixins/desktop/`
   - Examples: `ghostty.nix`, `zed.nix`, `aerospace.nix`
@@ -348,7 +348,7 @@ To add a new machine to this configuration:
 
 3. **Deploy**:
    ```sh
-   sudo darwin-rebuild switch --flake ~/.config/nix-darwin#new-hostname
+   sudo darwin-rebuild switch --flake "$HOME/.config/nix-darwin#new-hostname"
    ```
 
 4. **Install Claude Code** (native, self-updating; the cask lags behind the

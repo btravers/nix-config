@@ -23,7 +23,6 @@
         };
       };
       auto_install_extensions = {
-        biome = true;
         catppuccin = true;
         catppuccin-icons = true;
         html = true;

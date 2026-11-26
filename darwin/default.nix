@@ -2,6 +2,7 @@
   pkgs,
   config,
   username,
+  hostname,
   ...
 }:
 {
@@ -13,6 +14,10 @@
 
   system.stateVersion = 1;
   system.primaryUser = username;
+
+  # LocalHostName must match the flake attribute so `darwin-rebuild --flake .`
+  # picks this host's configuration.
+  networking.hostName = hostname;
 
   users.knownUsers = [ username ];
   users.users.${username} = {
@@ -61,15 +66,12 @@
       "sdl2"
     ];
     casks = [
-      "TheBoredTeam/boring-notch/boring-notch"
       "autodesk-fusion"
       "bambu-connect"
       "bambu-studio"
       "chatgpt"
       "claude"
       "cyberghost-vpn"
-      "docker-desktop"
-      "firefox"
       "firefox@developer-edition"
       "font-jetbrains-mono-nerd-font"
       "ghostty"

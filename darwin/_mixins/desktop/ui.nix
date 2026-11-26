@@ -24,11 +24,11 @@
     LSHandlers = [
       {
         LSHandlerURLScheme = "http";
-        LSHandlerRoleAll = "org.mozilla.firefox";
+        LSHandlerRoleAll = "org.mozilla.firefoxdeveloperedition";
       }
       {
         LSHandlerURLScheme = "https";
-        LSHandlerRoleAll = "org.mozilla.firefox";
+        LSHandlerRoleAll = "org.mozilla.firefoxdeveloperedition";
       }
     ];
   };

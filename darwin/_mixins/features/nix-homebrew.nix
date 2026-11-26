@@ -9,10 +9,19 @@
     enable = true;
     user = username;
     enableRosetta = pkgs.stdenv.hostPlatform.isAarch64;
+    package =
+      let
+        lock = builtins.fromJSON (builtins.readFile ../../../flake.lock);
+        version = lock.nodes.${lock.nodes.root.inputs.brew-src}.original.ref;
+      in
+      inputs.brew-src
+      // {
+        name = "brew-${version}";
+        inherit version;
+      };
     taps = {
       "homebrew/homebrew-core" = inputs.homebrew-core;
       "homebrew/homebrew-cask" = inputs.homebrew-cask;
-      "TheBoredTeam/homebrew-boring-notch" = inputs.homebrew-boring-notch;
       "nikitabobko/homebrew-tap" = inputs.homebrew-aerospace;
     };
     mutableTaps = false;

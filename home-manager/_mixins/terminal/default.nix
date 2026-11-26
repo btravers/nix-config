@@ -4,6 +4,7 @@
     ./bat.nix
     ./btop.nix
     ./carapace.nix
+    ./comma.nix
     ./cli.nix
     ./eza.nix
     ./fd.nix
