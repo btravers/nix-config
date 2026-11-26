@@ -35,9 +35,12 @@ main() {
   . /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
   set -u
 
-  step "Clone $repo"
+  step "Clone or update $repo"
   if [ ! -d "$dir/.git" ]; then
     git clone "$repo" "$dir"
+  else
+    # A re-run must apply the latest config, not the one first cloned.
+    git -C "$dir" pull --ff-only || echo "Could not update $dir; using it as is." >&2
   fi
 
   step "Switch to $host"
