@@ -2,7 +2,8 @@
 {
   xdg.configFile."ghostty/config" = {
     text = ''
-      theme = Catppuccin Mocha
+      # Follows the macOS appearance: Latte in light mode, Mocha in dark mode.
+      theme = light:Catppuccin Latte,dark:Catppuccin Mocha
       font-family = JetBrainsMono Nerd Font
 
       # Every window runs its own zellij session; zellij does tabs and splits.

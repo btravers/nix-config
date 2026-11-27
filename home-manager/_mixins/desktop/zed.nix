@@ -9,7 +9,12 @@
 
   xdg.configFile."zed/settings.json" = {
     text = builtins.toJSON {
-      icon_theme = "Catppuccin Mocha";
+      # Follow the macOS appearance: Latte in light mode, Mocha in dark mode.
+      icon_theme = {
+        mode = "system";
+        light = "Catppuccin Latte";
+        dark = "Catppuccin Mocha";
+      };
       telemetry = {
         diagnostics = false;
         metrics = false;
@@ -19,7 +24,7 @@
       buffer_font_size = 15;
       theme = {
         mode = "system";
-        light = "One Light";
+        light = "Catppuccin Latte";
         dark = "Catppuccin Mocha";
       };
       context_servers = lib.mapAttrs (_: s: { inherit (s) command args; }) config.programs.mcp.servers;
