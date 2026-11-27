@@ -48,7 +48,11 @@ in
 
   # Claude Code and Codex write their own plugin state, so install through
   # their CLIs, only what is missing. Plugins added by hand are left alone.
+  # Both clone marketplaces with git, which activation's PATH lacks; the
+  # subshell keeps that PATH from leaking into later activation steps.
   home.activation.installAgentPlugins = lib.hm.dag.entryAfter [ "installAgentCLIs" ] ''
+    (
+    export PATH=${lib.makeBinPath [ pkgs.git ]}:$PATH
     claude="$HOME/.local/bin/claude"
     codex="$HOME/.local/bin/codex"
 
@@ -92,5 +96,6 @@ in
         fi
       '')}
     fi
+    )
   '';
 }
