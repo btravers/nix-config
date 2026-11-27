@@ -2,8 +2,10 @@
 {
   xdg.configFile."ghostty/config" = {
     text = ''
-      # Follows the macOS appearance: Latte in light mode, Mocha in dark mode.
-      theme = light:Catppuccin Latte,dark:Catppuccin Mocha
+      # Always Mocha: zellij, starship, fzf, bat... are themed Mocha by the
+      # global catppuccin flavor and can't follow the macOS appearance, so a
+      # Latte background leaves their light text unreadable.
+      theme = Catppuccin Mocha
       font-family = JetBrainsMono Nerd Font
 
       # Every window runs its own zellij session; zellij does tabs and splits.
