@@ -1,6 +1,19 @@
-{ ... }:
+{ config, lib, ... }:
+let
+  m = config.aerospace.modifier;
+in
 {
-  xdg.configFile."aerospace/aerospace.toml" = {
+  options.aerospace.modifier = lib.mkOption {
+    type = lib.types.str;
+    default = "ctrl-alt";
+    description = ''
+      Modifier for every AeroSpace binding, set per host to suit its keyboard
+      layout. ctrl-alt by default: on French, alt (Option) types { [ | ~, which
+      plain alt bindings would swallow. US hosts can use plain alt.
+    '';
+  };
+
+  config.xdg.configFile."aerospace/aerospace.toml" = {
     text = ''
       after-login-command = []
       after-startup-command = []
@@ -31,70 +44,69 @@
       outer.top = 10
       outer.right = 10
 
-      # Main mode bindings. ctrl-alt, not alt: on the French layout alt (Option)
-      # types { [ | and other symbols, which plain alt bindings would swallow.
+      # Main mode bindings. The modifier is per host (aerospace.modifier).
       [mode.main.binding]
 
       # Focus windows
-      ctrl-alt-h = 'focus left'
-      ctrl-alt-j = 'focus down'
-      ctrl-alt-k = 'focus up'
-      ctrl-alt-l = 'focus right'
+      ${m}-h = 'focus left'
+      ${m}-j = 'focus down'
+      ${m}-k = 'focus up'
+      ${m}-l = 'focus right'
 
       # Move windows
-      ctrl-alt-shift-h = 'move left'
-      ctrl-alt-shift-j = 'move down'
-      ctrl-alt-shift-k = 'move up'
-      ctrl-alt-shift-l = 'move right'
+      ${m}-shift-h = 'move left'
+      ${m}-shift-j = 'move down'
+      ${m}-shift-k = 'move up'
+      ${m}-shift-l = 'move right'
 
       # Resize windows
-      ctrl-alt-shift-n = 'resize smart -50'
-      ctrl-alt-shift-p = 'resize smart +50'
+      ${m}-shift-n = 'resize smart -50'
+      ${m}-shift-p = 'resize smart +50'
 
       # Layout commands
-      ctrl-alt-t = 'layout tiles horizontal vertical'
-      ctrl-alt-s = 'layout accordion horizontal vertical'
-      ctrl-alt-f = 'fullscreen'
+      ${m}-t = 'layout tiles horizontal vertical'
+      ${m}-s = 'layout accordion horizontal vertical'
+      ${m}-f = 'fullscreen'
 
       # Float
-      ctrl-alt-shift-f = 'layout floating tiling'
+      ${m}-shift-f = 'layout floating tiling'
 
       # Switch workspaces
-      ctrl-alt-1 = 'workspace 1'
-      ctrl-alt-2 = 'workspace 2'
-      ctrl-alt-3 = 'workspace 3'
-      ctrl-alt-4 = 'workspace 4'
-      ctrl-alt-5 = 'workspace 5'
-      ctrl-alt-6 = 'workspace 6'
-      ctrl-alt-7 = 'workspace 7'
-      ctrl-alt-8 = 'workspace 8'
-      ctrl-alt-9 = 'workspace 9'
+      ${m}-1 = 'workspace 1'
+      ${m}-2 = 'workspace 2'
+      ${m}-3 = 'workspace 3'
+      ${m}-4 = 'workspace 4'
+      ${m}-5 = 'workspace 5'
+      ${m}-6 = 'workspace 6'
+      ${m}-7 = 'workspace 7'
+      ${m}-8 = 'workspace 8'
+      ${m}-9 = 'workspace 9'
 
       # Cycle through workspaces
-      ctrl-alt-tab = 'workspace next'
-      ctrl-alt-shift-tab = 'workspace prev'
+      ${m}-tab = 'workspace next'
+      ${m}-shift-tab = 'workspace prev'
 
       # Move windows to workspaces
-      ctrl-alt-shift-1 = 'move-node-to-workspace 1'
-      ctrl-alt-shift-2 = 'move-node-to-workspace 2'
-      ctrl-alt-shift-3 = 'move-node-to-workspace 3'
-      ctrl-alt-shift-4 = 'move-node-to-workspace 4'
-      ctrl-alt-shift-5 = 'move-node-to-workspace 5'
-      ctrl-alt-shift-6 = 'move-node-to-workspace 6'
-      ctrl-alt-shift-7 = 'move-node-to-workspace 7'
-      ctrl-alt-shift-8 = 'move-node-to-workspace 8'
-      ctrl-alt-shift-9 = 'move-node-to-workspace 9'
+      ${m}-shift-1 = 'move-node-to-workspace 1'
+      ${m}-shift-2 = 'move-node-to-workspace 2'
+      ${m}-shift-3 = 'move-node-to-workspace 3'
+      ${m}-shift-4 = 'move-node-to-workspace 4'
+      ${m}-shift-5 = 'move-node-to-workspace 5'
+      ${m}-shift-6 = 'move-node-to-workspace 6'
+      ${m}-shift-7 = 'move-node-to-workspace 7'
+      ${m}-shift-8 = 'move-node-to-workspace 8'
+      ${m}-shift-9 = 'move-node-to-workspace 9'
 
       # Service mode (for reloading config, etc.)
-      ctrl-alt-shift-r = 'mode service'
+      ${m}-shift-r = 'mode service'
 
       [mode.service.binding]
       esc = ['reload-config', 'mode main']
       r = ['flatten-workspace-tree', 'mode main']
-      ctrl-alt-shift-h = ['join-with left', 'mode main']
-      ctrl-alt-shift-j = ['join-with down', 'mode main']
-      ctrl-alt-shift-k = ['join-with up', 'mode main']
-      ctrl-alt-shift-l = ['join-with right', 'mode main']
+      ${m}-shift-h = ['join-with left', 'mode main']
+      ${m}-shift-j = ['join-with down', 'mode main']
+      ${m}-shift-k = ['join-with up', 'mode main']
+      ${m}-shift-l = ['join-with right', 'mode main']
     '';
   };
 }

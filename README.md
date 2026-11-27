@@ -145,15 +145,16 @@ To clean right away: `sudo nh clean all --keep-since 14d`.
 
 | Keys | What it does |
 |---|---|
-| `Ctrl+Alt+h/j/k/l` | AeroSpace: focus window left/down/up/right |
-| `Ctrl+Alt+Shift+h/j/k/l` | AeroSpace: move window |
-| `Ctrl+Alt+1…9` / `Ctrl+Alt+Shift+1…9` | AeroSpace: go to / move window to workspace |
+| `Mod+h/j/k/l` | AeroSpace: focus window left/down/up/right |
+| `Mod+Shift+h/j/k/l` | AeroSpace: move window |
+| `Mod+1…9` / `Mod+Shift+1…9` | AeroSpace: go to / move window to workspace |
 | `Cmd+n` | New Ghostty window (each one runs its own Zellij session) |
 | `Cmd+t` | New Zellij tab |
 | `Ctrl+g` | Unlock Zellij, then `Ctrl+p` panes, `Ctrl+t` tabs, `Ctrl+s` scroll, `Ctrl+o` session; `Ctrl+g` again to lock |
 
-AeroSpace uses `Ctrl+Alt` rather than `Alt` because on the French layout
-`Alt` (Option) types `{`, `[` and `|`.
+AeroSpace's `Mod` is set per host (`aerospace.modifier`): `Alt` on pro (US
+ANSI), `Ctrl+Alt` on air, because on the French layout `Alt` (Option) types
+`{`, `[` and `|`.
 
 ### Development Workflow
 
