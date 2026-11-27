@@ -1,7 +1,10 @@
 { ... }:
 {
   system.defaults.NSGlobalDomain = {
-    AppleInterfaceStyle = "Dark";
+    # Appearance: Auto (light by day, dark by night). macOS writes
+    # AppleInterfaceStyle itself as it switches, so leave that key unset:
+    # pinning it would force one mode back on every rebuild.
+    AppleInterfaceStyleSwitchesAutomatically = true;
     AppleShowAllExtensions = true;
     NSNavPanelExpandedStateForSaveMode = true;
     NSNavPanelExpandedStateForSaveMode2 = true;
