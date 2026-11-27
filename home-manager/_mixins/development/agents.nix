@@ -21,9 +21,12 @@ let
   q = lib.escapeShellArg;
 in
 {
-  # Binaries the LSP plugins start. rust-analyzer comes from each project's
-  # devShell instead, so it matches that project's Rust toolchain.
+  # Binaries the plugins start. rust-analyzer comes from each project's
+  # devShell instead, so it matches that project's Rust toolchain. Node runs
+  # ponytail's hooks; it is fnm's "system" fallback, so a project's
+  # .nvmrc still wins.
   home.packages = [
+    pkgs.nodejs
     pkgs.typescript
     pkgs.typescript-language-server
   ];
