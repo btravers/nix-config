@@ -15,6 +15,12 @@ in
 
   config.xdg.configFile."aerospace/aerospace.toml" = {
     text = ''
+      config-version = 2
+
+      # Workspaces 1-9 stay alive even when empty. config-version 1 inferred
+      # this from the bindings; version 2 needs it spelled out.
+      persistent-workspaces = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
+
       after-login-command = []
       after-startup-command = []
 
