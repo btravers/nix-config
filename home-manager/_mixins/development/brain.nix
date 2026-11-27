@@ -12,11 +12,12 @@ let
   # touches the Secretive key, so it never asks for Touch ID.
   remote = "https://github.com/btravers/obsidian.git";
   git = lib.getExe pkgs.git;
+  package = inputs.mcp-brain.packages.${pkgs.stdenv.hostPlatform.system}.default;
   # Stable profile path, not a store path: agent registrations survive updates.
   bin = "/etc/profiles/per-user/${username}/bin/mcp-brain";
 in
 {
-  home.packages = [ inputs.mcp-brain.packages.${pkgs.stdenv.hostPlatform.system}.default ];
+  home.packages = [ package ];
 
   # Registered with every agent by mcp.nix.
   programs.mcp.servers.brain = {
@@ -39,6 +40,32 @@ in
       fi
     elif [ "$(${git} -C ${lib.escapeShellArg vault} remote get-url origin 2>/dev/null)" != ${remote} ]; then
       run ${git} -C ${lib.escapeShellArg vault} remote set-url origin ${remote}
+    fi
+  '';
+
+  # Semantic search: the pinned embedding model (~490 MB, SHA-256 verified)
+  # lives in mcp-brain's state dir, outside the vault. Installing is a no-op
+  # once the files verify; a fresh install embeds the whole vault right away
+  # instead of gradually on later queries.
+  # Activation's PATH has neither curl (download) nor git (mcp-brain opens the
+  # vault's repo), so pass both.
+  home.activation.installBrainModel = lib.hm.dag.entryAfter [ "cloneBrainVault" ] ''
+    brain_path=${
+      lib.makeBinPath [
+        pkgs.curl
+        pkgs.git
+      ]
+    }:$PATH
+    if [ -d ${lib.escapeShellArg vault} ]; then
+      if out=$(run env PATH="$brain_path" \
+          ${lib.getExe package} --vault ${lib.escapeShellArg vault} --json model install); then
+        if [ "$(${lib.getExe pkgs.jq} -r .already_installed <<<"$out" 2>/dev/null)" = false ]; then
+          run env PATH="$brain_path" ${lib.getExe package} --vault ${lib.escapeShellArg vault} index rebuild \
+            || warnEcho "brain: model installed, but index rebuild failed; queries will embed notes gradually."
+        fi
+      else
+        warnEcho "brain: could not install the search model; switch again to retry."
+      fi
     fi
   '';
 

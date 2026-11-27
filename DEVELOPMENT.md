@@ -109,7 +109,7 @@ This configuration follows a modular, composable architecture designed for maint
 │       ├── development/             # Development tools
 │       │   ├── git.nix              # Git configuration
 │       │   ├── containers.nix       # Colima + docker CLI
-│       │   ├── brain.nix            # mcp-brain: vault clone, sync, MCP server
+│       │   ├── brain.nix            # mcp-brain: vault clone, sync, search model, MCP server
 │       │   ├── agents.nix           # Agent plugins (superpowers, ponytail, LSPs)
 │       │   ├── mcp.nix              # Registers MCP servers with every agent
 │       │   ├── opencode.nix         # opencode + its MCP servers

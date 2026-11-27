@@ -104,7 +104,9 @@ step 5 (no vault or AI agents there) and the app steps in step 4.
    `gh`, so its sync never asks for Touch ID) and registers the `brain`
    MCP server with Claude Code, Codex, Claude Desktop, opencode and Zed. The
    vault then syncs every 15 minutes (log: `~/Library/Logs/mcp-brain-sync.log`).
-   Restart the agents to pick the server up.
+   The first switch also downloads the ~490 MB semantic search model and
+   indexes the vault, so it takes a while. Restart the agents to pick the
+   server up.
 
 To add a machine with a new hostname, see
 [Adding a New Machine](./DEVELOPMENT.md#adding-a-new-machine). Each host sets
