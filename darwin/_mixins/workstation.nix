@@ -35,6 +35,7 @@
       "secretive"
       "slack"
       "spotify"
+      "vorssaint"
       "whatsapp"
       "zed"
     ];
