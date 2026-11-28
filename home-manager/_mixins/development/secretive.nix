@@ -2,7 +2,7 @@
 let
   home = config.home.homeDirectory;
   # Secretive (cask in darwin/_mixins/workstation.nix) keeps SSH keys in the
-  # Secure Enclave, one per Mac, unlocked with Touch ID.
+  # Secure Enclave, one per Mac, created without Touch ID (push and sign silently).
   socket = "${home}/Library/Containers/com.maxgoedjen.Secretive.SecretAgent/Data/socket.ssh";
 in
 {
